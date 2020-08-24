@@ -1,0 +1,27 @@
+MONDAY:
+
+    - Models, get API working correctly.
+
+
+
+
+
+
+
+Building the rest of your application
+Okay, so if you've gotten this far, you have a Rails app running and you have a vanilla HTML and JavaScript client app that can talk to the Rails app. You'll want to add features to your project, to match your design. Where to next?
+
+Some things to consider:
+
+To add nouns to your world, create models in rails
+
+To show your nouns, you'll need:
+
+A controller action to send the data
+A fetch request to ask for the data
+Some JavaScript code to handle DOM-rendering
+To make your page respond to the user, you'll need event listeners
+
+To keep your code clean, you should use JavaScript classes
+
+To organize your code, you can use multiple JavaScript files (don't forget to add <script> tags for each one!)
