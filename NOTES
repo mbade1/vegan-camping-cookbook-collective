@@ -4,7 +4,15 @@ MONDAY:
 
 
 
+Layer Order: migrations, models, seed data, controller actions, data fetching, view logic, styling
 
+Build the R from CRUD for just one model, vertically! 
+That means one migration, one model, one controller action, one fetch call, and one DOM update. 
+Add seed data and confirm that your code works by testing it visually.
+Then, build the next CRUD action (maybe Create or Update), again building vertically.
+Continue building features one by one, (vertically!)
+Add feature by feature, not model by model or layer by layer.
+Test each feature, add styles, and create seed data as you go (not all at once at the end)
 
 
 
