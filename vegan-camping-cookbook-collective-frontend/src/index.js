@@ -1,29 +1,28 @@
-console.log("testing...")
+const BASE_URL = "http://localhost:3000"
+const RECIPES_URL = `${BASE_URL}/recipes`
+const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
+const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
+const USERS_URL = `${BASE_URL}/users`
 
-
-const BACKEND_URL = 'http://localhost:3000';
 
 
 
 
 //Users test fetch
-  // fetch(`${BACKEND_URL}/users`)
-  // .then(response => response.json())
-  // .then(parsedResponse => console.log(parsedResponse));
+  fetch(`${USERS_URL}`)
+  .then(response => response.json())
+  .then(parsedResponse => console.log(parsedResponse));
 
 //Cookbooks test fetch
-  // fetch(`${BACKEND_URL}/cookbooks`)
-  // .then(response => response.json())
-  // .then(parsedResponse => console.log(parsedResponse));
-
-  // fetch(`${BACKEND_URL}/cookbook_recipes`)
-  // .then(response => response.json())
-  // .then(parsedResponse => console.log(parsedResponse));
-
-  fetch(`${BACKEND_URL}/recipes`)
+  fetch(`${COOKBOOKS_URL}`)
+  .then(response => response.json())
+  .then(parsedResponse => console.log(parsedResponse));
+//Cookbook_recipes test fetch
+  fetch(`${COOKBOOK_RECIPES_URL}`)
+  .then(response => response.json())
+  .then(parsedResponse => console.log(parsedResponse));
+//Recipes test fetch
+  fetch(`${RECIPES_URL}`)
   .then(response => response.json())
   .then(parsedResponse => console.log(parsedResponse));
 
-  fetch(`${BACKEND_URL}/cookbook`)
-  .then(response => response.json())
-  .then(parsedResponse => console.log(parsedResponse));
