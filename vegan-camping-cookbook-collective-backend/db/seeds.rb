@@ -7,3 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 user1 = User.create(name: 'Mike', email: 'mike@gmail.com')
 user2 = User.create(name: 'Larry', email: 'larry@gmail.com')
+
+cookbook1 = Cookbook.create(user_id: 1, print_recipes: false)
+cookbook2 = Cookbook.create(user_id: 1, print_recipes: false)
+cookbook3 = Cookbook.create(user_id: 2, print_recipes: false)
+cookbook4 = Cookbook.create(user_id: 2, print_recipes: false)
