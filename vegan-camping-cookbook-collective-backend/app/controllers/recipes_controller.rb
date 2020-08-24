@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
     end
 
     def sort_upvotes
+        sorted = Recipe.all.sort_by{|plant| plant.upvotes }   
+        render json: sorted.reverse
     end
-
-
 end

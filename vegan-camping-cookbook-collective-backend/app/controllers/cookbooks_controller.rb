@@ -12,4 +12,15 @@ class CookbooksController < ApplicationController
         cookbooks = Cookbook.all
         render json: cookbooks
     end
+
+    def cookbook
+        cookbook = Cookbook.find(params[:id])
+        cookbook.print_recipes = true 
+        cookbook.save
+        user = cookbook.user 
+        
+        new_cart = Cart.create(user_id: user.id)
+        
+        render json: user
+    end
 end
