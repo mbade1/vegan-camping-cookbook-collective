@@ -2,7 +2,8 @@ body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-
+    background-color: rgb(201, 194, 194);
+    position: relative;
 }
 
 * {
@@ -28,11 +29,13 @@ body, html {
   }
 
 .login-container {
-    text-align: left;
-    padding: 10px;
-    border: 1px solid blue;
-    width: 20%;
+    float: left;
+    padding: 5px;
+    width: 25%;
     height: 70%;
+    background-color: white;
+    text-align: left;
+    overflow: hidden;
 }
 
 .login-container .login input  {
@@ -40,17 +43,32 @@ body, html {
 }
 
 input[type=text] {
-    width: 50%;
-    border: 1px solid rgba(117, 41, 41, 0.959);
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-  } 
-
-  input[type=text] {
     color: black;
     border: 2px solid #555;
     border-radius: 25px;
     outline: none;
-    
-  }
+}
+
+.recipe-container {
+    float: left;
+    width: 60%;   
+    background-color: rgb(201, 194, 194);
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.sort-by {
+    margin: 10px;
+    float: left;
+    height: 10%;
+    width: 98%;
+    background-color: white;
+    padding: 5px;
+}
+
+.sort-by select {
+    color: black;
+    border: 2px solid #555;
+    outline: none;
+    border-radius: 25px;
+}

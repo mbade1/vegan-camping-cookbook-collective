@@ -12,19 +12,40 @@
         <h4>A website for vegan camping recipes.</h4>
       </div>
     </div>
-
     <div class="logout">
     </div>
     <div class="cookbook">
     </div>
     <div class="login-container">
+      <h3>Your Chosen Recipes!</h3>
+      <p>Recipe 1 title</p>
+      <p>Recipe 2 title</p>
+      <p>Recipe 3 title</p>
       <form class="login" >
         <h3> Sign In to Save Your Recipes</h3>
         Name: <input type="text" name="name" value="" placeholder="Name" class="input-text" ><br><br>
-        <input type="submit" name="submit" value="Sign In" class="submit">
+        <input type="submit" name="submit" value="Save Recipes" class="submit">
       </form>
     </div>
 
+    <div class="recipe-container">
+      <div class="sort-by">
+        <h3>
+          Sort Recipes By: Upvotes | Meal: 
+            <select id="meal" name="meal">
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snack">Snack</option>
+              <option value="dessert">Dessert</option>
+            </select>
+          Reset
+        </h3>
+        </div>
+        <div class="recipe">
+        
+      </div>
+    </div>
 
    <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
   </body>
