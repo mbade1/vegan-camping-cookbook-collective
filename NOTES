@@ -1,7 +1,8 @@
 WEDNESDAY:
     - Sort By Functions
     - Finish Accordion Style Show
-
+    - Add recipe title to cookbook
+    - Signin feature to save recipes
 
 
 Layer Order: migrations, models, seed data, controller actions, data fetching, view logic, styling

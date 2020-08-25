@@ -33,7 +33,7 @@ function renderRecipes(recipes){
   recipes.forEach((recipe) => {
     recipe_container.innerHTML += `
     <button class="accordion">${recipe.title}</button>
-    <div class="recipe"> 
+    <div class="panel"> 
       <img src="${recipe.image}" class="recipe-avatar">
       <span class="title">${recipe.title}</span>
       <br><br><span class="upvotes"><b>${recipe.upvotes}</b> Upvotes</span><br>
