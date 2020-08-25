@@ -6,6 +6,9 @@ const USERS_URL = `${BASE_URL}/users`
 
 const recipe_container = document.getElementById("recipe-container");
 
+let loggedIn = null;
+let signedUp = false;
+
 function fetchRecipes() {
   recipe_container.innerHTML = "";
   fetchData = {
@@ -29,42 +32,53 @@ function renderRecipes(recipes){
   recipes.innerHTML = "";
   recipes.forEach((recipe) => {
     recipe_container.innerHTML += `
+    <button class="accordion">${recipe.title}</button>
     <div class="recipe"> 
-      <img src="${recipe.image}" class="recipe-avatar"><br>
+      <img src="${recipe.image}" class="recipe-avatar">
       <span class="title">${recipe.title}</span>
-      <br><br>
-      <table>
-        <tr>
-          <td><strong>Prep Time:</strong> ${recipe.prep_time} minutes</td>
-          <td><strong>Cook Time:</strong> ${recipe.cook_time} minutes</td>
-        </tr>
-        <tr>
-          <td><strong>Servings:</strong> ${recipe.servings}</td>
-          <td><strong>Meal:</strong> ${recipe.meal}</td>
-        </tr>
-        <tr>
-          <td><strong>URL:</strong></td>
-        </tr>
-      </table>
+      <br><br><span class="upvotes"><b>${recipe.upvotes}</b> Upvotes</span><br>
+      <span class="recipe-content">
+        <b>Prep Time:</b> ${recipe.prep_time} minutes 
+        <br><b>Cook Time:</b> ${recipe.cook_time} minutes
+        <br><b>Servings:</b> ${recipe.servings} 
+        <br><b>Meal:</b> ${recipe.meal}
+        <br><br><b>Ingredients:</b> ${recipe.ingredients}
+        <br><br><b>Directions:</b> ${recipe.instructions}
+      </span>
     </div>`
   })
 }
 
-/* <img src="frenchtoast.jpg">
-<p class="title">Coconut French Toast</p>
-<table>
-  <tr>
-    <td>Prep Time: 5 minutes</td>
-    <td>Cook Time: 10 minutes</td>
-  </tr>
-  <tr>
-    <td>Servings: 8</td>
-    <td>Meal: Breakfast</td>
-  </tr>
-  <tr>
-    <td>URL: www.frenchtoast.com</td>
-  </tr>
-</table> */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function checkForUser(){
+//   if(localStorage.loggedIn){
+//     let id = localStorage.loggedIn
+//     fetch(USERS_URL + "/" + id)
+//     .then(resp => resp.json())
+//     .then(function(resp){
+//       loggedIn = resp
+//       renderLoggedInUser()
+//     })
+//     hideSignUpForm()
+//   } else {
+
+//   }
+// }
+
 
 
 
