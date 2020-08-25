@@ -32,7 +32,7 @@ body, html {
     float: left;
     padding: 5px;
     width: 20%;
-    height: 494px;
+    height: 100%;
     background-color: white;
     text-align: left;
     overflow: hidden;
@@ -56,6 +56,8 @@ input[type=text] {
     overflow: hidden;
 }
 
+
+
 .sort-by {
     margin-left: 10px;
     float: left;
@@ -72,37 +74,40 @@ input[type=text] {
     border-radius: 25px;
 }
 
-.recipe-container .recipe {
+
+
+
+
+
+div.recipe {
     float: left;
     background-color: white;
     margin: 10px;
-    height: 200px;
+    height: 250px;
     width: 400px;
     border: 1px solid gray;
+    overflow: hidden;
 }
-.recipe-container .recipe h3 {
-    text-align: center;
-}
-.recipe-container .recipe img {
+
+.recipe-avatar {
     display: block;
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-    width: 75px;
-    height: 50px;
+    width: 120px;
+    height: 100px;
+    border: 5px solid red;
 }
-.recipe-container .recipe p {
-    margin: 5px;
+span.title {
+    font-size: 1.3em;
+    text-align: center;
 }
-.recipe-container .recipe table, th, td {
+
+
+div.recipe table, th, td {
     text-align: center;
     border: 2px solid black;
     border-collapse: collapse;
     padding: 2px;
     margin: 0 auto;
-}
-
-.recipe-container .recipe .title {
-    font-size: 2.0em;
-    text-align: center;
 }

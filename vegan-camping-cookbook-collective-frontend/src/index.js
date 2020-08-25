@@ -4,10 +4,10 @@ const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
-const mainContainer = document.querySelector("main");
+const recipe_container = document.getElementById("recipe-container");
 
 function fetchRecipes() {
-  mainContainer.innerHTML = "";
+  recipe_container.innerHTML = "";
   fetchData = {
     method: 'GET',
     headers: {
@@ -28,8 +28,25 @@ console.log(fetchRecipes());
 function renderRecipes(recipes){
   recipes.innerHTML = "";
   recipes.forEach((recipe) => {
-    const recipeContainer = document.createElement('div')
-    recipeContainer.className = "recipe"
+    recipe_container.innerHTML += `
+    <div class="recipe"> 
+      <img src="${recipe.image}" class="recipe-avatar"><br>
+      <span class="title">${recipe.title}</span>
+      <br><br>
+      <table>
+        <tr>
+          <td><strong>Prep Time:</strong> ${recipe.prep_time} minutes</td>
+          <td><strong>Cook Time:</strong> ${recipe.cook_time} minutes</td>
+        </tr>
+        <tr>
+          <td><strong>Servings:</strong> ${recipe.servings}</td>
+          <td><strong>Meal:</strong> ${recipe.meal}</td>
+        </tr>
+        <tr>
+          <td><strong>URL:</strong></td>
+        </tr>
+      </table>
+    </div>`
   })
 }
 
