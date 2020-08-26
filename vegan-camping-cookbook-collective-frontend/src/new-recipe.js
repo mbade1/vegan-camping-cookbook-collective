@@ -1,4 +1,18 @@
+class Recipe {
+    constructor(attributes) {
+        this.title = attributes.title;
+        this.prep_time = attributes.prep_time;
+        this.cook_time = attributes.cook_time;
+        this.servings = attributes.servings;
+        this.meal = attributes.meal;
+        this.ingredients = attributes.ingredients;
+        this.instructions = attributes.instructions;
+        this.image = attributes.image;
+        this.upvotes = 0;
+    }
+}
 
+const add_recipe = document.querySelector(".add")
 add_recipe.addEventListener('click', function(e){
     recipe_container.innerHTML = "";
     sort_by_container.innerHTML = "";
@@ -51,4 +65,4 @@ add_recipe.addEventListener('click', function(e){
     <p><span class="add"><b>Click here to add a new recipe</b></span></p>`
       fetchRecipes();
     })
-  })
+  }) 

@@ -86,9 +86,10 @@ div.recipe {
     float: left;
     background-color: white;
     margin: 10px;
-    height: 350px;
-    width: 30%;
+    height: 190px;
+    width: 45%;
     overflow: scroll;
+    border-radius: 5px;
 }
 
 .recipe-avatar {

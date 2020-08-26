@@ -9,7 +9,6 @@ const meal_sorter = document.querySelector(".sort-meal")
 const sort_by_container = document.querySelector(".sort-by")
 const reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
-const add_recipe = document.querySelector(".add")
 
 let loggedIn = null;
 let signedUp = false;
@@ -65,5 +64,13 @@ function renderRecipes(recipes){
     </div>`
   })
 }
+
+
+
+
+
+
+
+
 
 fetchRecipes()
