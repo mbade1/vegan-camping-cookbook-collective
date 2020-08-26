@@ -5,9 +5,31 @@ const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
 const recipe_container = document.getElementById("recipe-container");
+const meal_sorter = document.querySelector(".sort-meal")
+const reset = document.querySelector(".reset")
+console.log(reset);
 
 let loggedIn = null;
 let signedUp = false;
+
+meal_sorter.addEventListener('change', function(e){
+  if (e.target.value === "index") {
+    fetchRecipes()
+  } else {
+  fetch(BASE_URL + `/sort_${e.target.value}`)
+  .then(res => res.json())
+  .then(recipes => renderRecipes(recipes))
+}})
+
+reset.addEventListener('click', function(e){
+  fetch(BASE_URL)
+  .then(res => res.json())
+  .then(recipes => renderRecipes(recipes))
+})
+
+
+
+
 
 function fetchRecipes() {
   recipe_container.innerHTML = "";
@@ -24,11 +46,11 @@ function fetchRecipes() {
   .catch(error => console.log(error.message))
 }
 
-console.log(fetchRecipes());
 
 
 
 function renderRecipes(recipes){
+  recipe_container.innerHTML = ""
   recipes.forEach((recipe) => {
     recipe_container.innerHTML += 
     `<div class="recipe"> 
