@@ -29,22 +29,19 @@ console.log(fetchRecipes());
 
 
 function renderRecipes(recipes){
-  recipes.innerHTML = "";
   recipes.forEach((recipe) => {
-    recipe_container.innerHTML += `
-    <button class="accordion">${recipe.title}</button>
-    <div class="panel"> 
+    recipe_container.innerHTML += 
+    `<div class="recipe"> 
       <img src="${recipe.image}" class="recipe-avatar">
-      <span class="title">${recipe.title}</span>
-      <br><br><span class="upvotes"><b>${recipe.upvotes}</b> Upvotes</span><br>
-      <span class="recipe-content">
-        <b>Prep Time:</b> ${recipe.prep_time} minutes 
-        <br><b>Cook Time:</b> ${recipe.cook_time} minutes
-        <br><b>Servings:</b> ${recipe.servings} 
-        <br><b>Meal:</b> ${recipe.meal}
-        <br><br><b>Ingredients:</b> ${recipe.ingredients}
-        <br><br><b>Directions:</b> ${recipe.instructions}
-      </span>
+      <span class="title">${recipe.title} <span class="upvotes"> <b>${recipe.upvotes} Upvotes <button type="button">+ -</button></b></span></span>
+
+      <br><br><span class="recipe-content"><b>Prep Time:</b> ${recipe.prep_time} minutes </span>
+      <br><span class="recipe-content"><b>Cook Time:</b> ${recipe.cook_time} minutes</span>
+      <br><span class="recipe-content"><b>Servings:</b> ${recipe.servings} </span>
+      <br><span class="recipe-content"><b>Meal:</b> ${recipe.meal}</span>
+      <p class="recipe-content"><b>Ingredients:</b> ${recipe.ingredients}</p>
+      <p class="recipe-content"><b>Directions:</b> ${recipe.instructions}</p>
+      </p>
     </div>`
   })
 }

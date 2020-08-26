@@ -3,7 +3,7 @@ WEDNESDAY:
     - Finish Accordion Style Show
     - Add recipe title to cookbook
     - Signin feature to save recipes
-
+https://icons8.com/icon/set/cooking/wired
 
 Layer Order: migrations, models, seed data, controller actions, data fetching, view logic, styling
 
