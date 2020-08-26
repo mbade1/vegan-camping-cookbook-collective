@@ -9,6 +9,11 @@ class RecipesController < ApplicationController
         render json: recipe
     end
 
+    def create 
+        recipe = Recipe.create(recipe_params)
+        render json: recipe
+    end
+
     def sort_breakfast 
         breakfast = Recipe.all.select{|recipe| recipe.meal == "breakfast"}
         render json: breakfast
@@ -22,7 +27,6 @@ class RecipesController < ApplicationController
     def sort_dinner
         dinner = Recipe.all.select{|recipe| recipe.meal == "dinner"}
         render json: dinner
-
     end
 
     def sort_snack
@@ -38,5 +42,11 @@ class RecipesController < ApplicationController
     def sort_upvotes
         sorted = Recipe.all.sort_by{|plant| plant.upvotes }   
         render json: sorted.reverse
+    end
+
+    private
+
+    def recipe_params
+        params.recuie(:recipe).permit(:title, :prep_time, :cook_time, :servings, :meal, :ingredients, :instructions, :image, :upvotes)
     end
 end
