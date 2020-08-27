@@ -17,12 +17,10 @@ ActiveRecord::Schema.define(version: 2020_08_24_154129) do
 
   create_table "cookbooks", force: :cascade do |t|
     t.boolean "email_recipes"
-    t.bigint "recipe_id"
-    t.bigint "user_id"
+    t.integer "recipe_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipe_id"], name: "index_cookbooks_on_recipe_id"
-    t.index ["user_id"], name: "index_cookbooks_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -47,6 +45,4 @@ ActiveRecord::Schema.define(version: 2020_08_24_154129) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "cookbooks", "recipes"
-  add_foreign_key "cookbooks", "users"
 end

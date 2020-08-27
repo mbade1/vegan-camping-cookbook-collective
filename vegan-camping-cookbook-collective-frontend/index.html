@@ -8,30 +8,53 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 <body>
-  <div class="hero-image">
+  <div id="hero-image">
     <div class="hero-text">
       <h1>VEGAN CAMPING COOKBOOK COLLECTIVE</h1>
-      <h4>A website for vegan camping recipes.</h4>
+      <h2>A website for vegan camping recipes.</h2>
+      <div id="signup-form">
+        <form>
+            <input type="text" name="name" value="" placeholder="Username" class="signup-input">
+            <br><br>
+            <input type="text" name="email" value="" placeholder="Email" class="signup-input">
+            <br><br>
+            <input type="password" name="password" value="" placeholder="Password" class="signup-input">
+            <br><br>
+            <input type="submit" name="submit" value="Submit" class="submit">
+        </form>
+      </div>
       <h3><div id="welcome-container"></div></h3>
     </div>
   </div>
 
-  <div id="signup-form">
-    <form>
-        <h3>Sign Up or Login Here:</h3>
-        <input type="text" name="name" value="" placeholder="Username" class="signup-input">
-        <br>
-        <input type="text" name="email" value="" placeholder="Email" class="signup-input">
-        <br>
-        <input type="password" name="password" value="" placeholder="Password" class="signup-input">
-        <br>
-        <input type="submit" name="submit" value="Submit" class="submit">
+
+
+<!--Email Cookbook Container -->
+  <div class="cookbook-container">
+    <h3>Your Chosen Recipes!</h3>
+    <form class="email" >
+      Email: <input type="text" name="email" value="" placeholder="Email" class="input-text" >
+      <br><br><input type="submit" name="submit" value="Email Recipes" class="submit">
     </form>
   </div>
 
-<!--Email Cookbook Container -->
-
   <!--Sort by Container-->
+  <div class="sort-by">
+    <h3>
+      Sort Recipes By:<span class="upvotes">Popularity</span> | Meal:
+      <span class="sort-meal"> 
+        <select id="meal" name="meal">
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+          <option value="dessert">Dessert</option>
+        </select>
+      </span>
+      <span class="reset">All</span>
+    </h3>
+    <p><span class="add"><b>Click here to add a new recipe</b></span></p>
+  </div>
 
   <div id="recipe-container">
   </div>

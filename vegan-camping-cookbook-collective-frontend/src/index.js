@@ -4,57 +4,25 @@ const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
+let user 
+const heroImage = document.querySelector("#hero-image")
 const signupForm = document.querySelector('#signup-form')
 const signupInputs = document.querySelectorAll(".signup-input")
 const welcomeContainer = document.querySelector('#welcome-container')
-let user 
-
 const recipe_container = document.getElementById("recipe-container");
 const meal_sorter = document.querySelector(".sort-meal")
 const sort_by_container = document.querySelector(".sort-by")
 const reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
-// const votes = document.getElementsByClassName()
+const cookbookContainer = document.querySelector('.cookbook-container')
 const voting = document.getElementsByClassName("#fas fa-fire-alt")
 
 let loggedIn = null
 
-class Recipe {
-  constructor(attributes) {
-      this.title = attributes.title;
-      this.prep_time = attributes.prep_time;
-      this.cook_time = attributes.cook_time;
-      this.servings = attributes.servings;
-      this.meal = attributes.meal;
-      this.ingredients = attributes.ingredients;
-      this.instructions = attributes.instructions;
-      this.image = attributes.image;
-      this.upvotes = attributes.upvotes;
-  }
-  render() {
-      return `<div class="recipe"> 
-        <img src="${this.image}" class="recipe-avatar">
-        <span class="title">${this.title}</span> <span class="upvotes"> <b>${this.upvotes} Upvotes <i class="fas fa-fire-alt" style="font-size:24px"></i></b></span>
-        <br><br><span class="recipe-content"><b>Prep Time:</b> ${this.prep_time} minutes </span>
-        <br><span class="recipe-content"><b>Cook Time:</b> ${this.cook_time} minutes</span>
-        <br><span class="recipe-content"><b>Servings:</b> ${this.servings} </span>
-        <br><span class="recipe-content"><b>Meal:</b> ${this.meal}</span>
-        <p class="recipe-content"><b>Ingredients:</b> ${this.ingredients}</p>
-        <p class="recipe-content"><b>Directions:</b> ${this.instructions}</p>
-        </p>
-      </div>`
-      
-  }
-}
 
-function renderRecipes(recipes){
-  recipe_container.innerHTML = ""
-  recipes.forEach(recipe => {
-    recipe_container.innerHTML += new Recipe(recipe).render()
-  })
-}
-
+//Signup EventListener
 signupForm.addEventListener('submit', function(e){
+
   e.preventDefault()
   fetch(USERS_URL, {
       method: "POST",
@@ -82,28 +50,12 @@ signupForm.addEventListener('submit', function(e){
   )
 })
 
-meal_sorter.addEventListener('change', function(e){
-  if (e.target.value === "") {
-    fetchRecipes()
-  } else {
-  fetch(BASE_URL + `/sort_${e.target.value}`)
-  .then(res => res.json())
-  .then(recipes => renderRecipes(recipes))
-}})
-
-reset.addEventListener('click', function(e){
-  fetchRecipes();
-})
-
-upvotes.addEventListener('click', function(e){
-  fetch(BASE_URL + `/sort_upvotes`)
-  .then(res => res.json())
-  .then(recipes => renderRecipes(recipes))
-})
-
 function fetchRecipes(object) {
-  user = object
+  user = object;
+  heroImage.style.height = '30%';
   signupForm.style.display = 'none';
+  sort_by_container.style.display = 'inline-block';
+  cookbookContainer.style.display = 'inline-block';
   welcomeContainer.innerHTML = `Welcome, ${user.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`
   recipe_container.innerHTML = "";
   fetchData = {
@@ -119,7 +71,67 @@ function fetchRecipes(object) {
   .catch(error => console.log(error.message));
 }
 
-fetchRecipes()
+function renderRecipes(recipes){
+  recipe_container.innerHTML = ""
+  recipes.forEach(recipe => {
+    recipe_container.innerHTML += new Recipe(recipe).render()
+  })
+  
+}
+
+class Recipe {
+  constructor(attributes) {
+      this.title = attributes.title;
+      this.prep_time = attributes.prep_time;
+      this.cook_time = attributes.cook_time;
+      this.servings = attributes.servings;
+      this.meal = attributes.meal;
+      this.ingredients = attributes.ingredients;
+      this.instructions = attributes.instructions;
+      this.image = attributes.image;
+      this.upvotes = attributes.upvotes;
+  }
+  render() {
+      return `<div class="recipe"> 
+        <img src="${this.image}" class="recipe-avatar">
+        <span class="title">${this.title}</span> <span class="upvotes"> <i class="fas fa-fire-alt" style="font-size:24px"></i></span>
+        <br><br><span class="recipe-content"><b>Prep Time:</b> ${this.prep_time} minutes </span>
+        <br><span class="recipe-content"><b>Cook Time:</b> ${this.cook_time} minutes</span>
+        <br><span class="recipe-content"><b>Servings:</b> ${this.servings} </span>
+        <br><span class="recipe-content"><b>Meal:</b> ${this.meal}</span>
+        <p class="recipe-content"><b>Ingredients:</b> ${this.ingredients}</p>
+        <p class="recipe-content"><b>Directions:</b> ${this.instructions}</p>
+        </p>
+      </div>`
+  }
+}
+
+
+
+
+
+
+
+
+meal_sorter.addEventListener('change', function(e){
+  fetch(BASE_URL + `/sort_${e.target.value}`)
+  .then(res => res.json())
+  .then(recipes => renderRecipes(recipes))
+})
+
+reset.addEventListener('click', function(e){
+  fetch(RECIPES_URL)
+  .then(res => res.json())
+  .then(recipes => renderRecipes(recipes))
+})
+
+upvotes.addEventListener('click', function(e){
+  fetch(BASE_URL + `/sort_upvotes`)
+  .then(res => res.json())
+  .then(recipes => renderRecipes(recipes))
+})
+
+
 
 //everything above is needed!!!!!!!!
 

@@ -10,9 +10,9 @@ body, html {
     font-family: 'Playfair Display', serif;
   }
 
-.hero-image {
+#hero-image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("header.jpg");
-    height: 30%;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: inherit;
@@ -28,22 +28,9 @@ body, html {
     color: rgb(201, 194, 194);
   }
 
-.login-container {
-    float: left;
-    padding: 5px;
-    width: 20%;
-    height: auto;
-    background-color: white;
-    text-align: left;
-    overflow: hidden;
-    margin: 10px;
-}
 
-.login-container .login input  {
-    color: black;
-}
 
-input[type=text] {
+input[type=text], input[type=password] {
     color: black;
     border: 2px solid #555;
     border-radius: 25px;
@@ -56,9 +43,31 @@ textarea {
     outline: none;
 }
 
+.cookbook-container {
+    display:none;
+    float: left;
+    padding: 5px;
+    width: 20%;
+    height: auto;
+    background-color: white;
+    text-align: left;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.cookbook-container .login input  {
+    color: black;
+}
+
+
+
+
+
+
 .sort-by {
     margin-left: 10px;
-    float: left;
+    float: none;
+    display: none;
     height: 120px;
     width: 70%;
     background-color: white;
@@ -103,12 +112,13 @@ div.recipe {
     border: 2px solid #555;
     border-radius: 25px;
 }
+
 span.title {
     font-size: 1.3em;
     text-align: center;
-    margin-left: 10px;
     margin-top: 10px;
 }
+
 span.upvotes {
     margin-left: 10px;
     margin-top: 10px;
