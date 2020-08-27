@@ -4,6 +4,11 @@ const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
+const signupForm = document.querySelector('#signup-form')
+const signupInputs = document.querySelectorAll(".signup-input")
+const welcomeContainer = document.querySelector('#welcome-container')
+let user 
+
 const recipe_container = document.getElementById("recipe-container");
 const meal_sorter = document.querySelector(".sort-meal")
 const sort_by_container = document.querySelector(".sort-by")
@@ -49,6 +54,33 @@ function renderRecipes(recipes){
   })
 }
 
+signupForm.addEventListener('submit', function(e){
+  e.preventDefault()
+  fetch(USERS_URL, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+      },
+      body: JSON.stringify({
+          user: {
+              name: signupInputs[0].value,
+              email: signupInputs[1].value,
+              password: signupInputs[2].value
+          }
+      })
+  })
+  .then(res => res.json())
+  .then(function(object){
+      if (object.message) {
+          alert(object.message)
+      }
+      else {
+      fetchRecipes(object)
+      }
+  }
+  )
+})
 
 meal_sorter.addEventListener('change', function(e){
   if (e.target.value === "") {
@@ -69,7 +101,10 @@ upvotes.addEventListener('click', function(e){
   .then(recipes => renderRecipes(recipes))
 })
 
-function fetchRecipes() {
+function fetchRecipes(object) {
+  user = object
+  signupForm.style.display = 'none';
+  welcomeContainer.innerHTML = `Welcome, ${user.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`
   recipe_container.innerHTML = "";
   fetchData = {
     method: 'GET',

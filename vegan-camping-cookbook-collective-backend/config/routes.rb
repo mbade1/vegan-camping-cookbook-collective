@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :recipes, only: [:index, :show, :create, :destroy, :update]
   resources :cookbooks, only: [:index, :show]
-  resources :users, only: [:create, :show, :index]
+  resources :users
 
   post '/cookbook' => 'cookbooks#cookbook'
 
