@@ -91,6 +91,19 @@ function votingEvents(voting) {
     for (let i = 0; i < voting.length; i++) {
         voting[i].addEventListener('click', function(event){
             if (event.target.style.color === '') {
+              fetch(RECIPES_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                        upvotes: `${this.upvotes + 1}`,
+                })
+              })
+              .then( res => res.json())
+              .then( res => event.target.dataset.upvotes = res.upvotes)
+              .catch(error => console.log(error.message));
                 event.target.style.color = "red"
                 this.upvotes += 1
             } else if (event.target.style.color === 'red'){

@@ -1,5 +1,3 @@
-
-
 const add_recipe = document.querySelector(".add")
 add_recipe.addEventListener('click', function(e){
     recipe_container.innerHTML = "";

@@ -4,7 +4,6 @@ THURSDAY:
     - Email fetch to "email" recipes
     - Upvote button that manipulates upvote count (like filled in icon vs unfilled icon)
     - Figure out why, after "adding a recipe," event listeners are not working.
-https://icons8.com/icon/set/cooking/wired
 
 Layer Order: migrations, models, seed data, controller actions, data fetching, view logic, styling
 

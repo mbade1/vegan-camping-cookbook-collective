@@ -10,8 +10,12 @@ class RecipesController < ApplicationController
     end
 
     def create 
-        recipe = Recipe.create(recipe_params)
-        render json: recipe
+        recipe = Recipe.new(recipe_params)
+        if recipe.save
+            render json: recipe
+        else 
+            render json: {message: "Recipe could not be added"}
+        end
     end
 
     def sort_breakfast 
