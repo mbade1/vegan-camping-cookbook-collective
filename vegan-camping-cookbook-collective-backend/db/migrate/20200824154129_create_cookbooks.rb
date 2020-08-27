@@ -1,8 +1,9 @@
 class CreateCookbooks < ActiveRecord::Migration[6.0]
   def change
     create_table :cookbooks do |t|
-      t.boolean :print_recipes
-      t.integer :user_id
+      t.boolean :email_recipes
+      t.references :recipe, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

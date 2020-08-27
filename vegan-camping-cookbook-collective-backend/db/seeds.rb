@@ -8,16 +8,6 @@
 user1 = User.create(name: 'Mike', email: 'mike@gmail.com')
 user2 = User.create(name: 'Larry', email: 'larry@gmail.com')
 
-cookbook1 = Cookbook.create(user_id: 1, print_recipes: false)
-cookbook2 = Cookbook.create(user_id: 1, print_recipes: false)
-cookbook3 = Cookbook.create(user_id: 2, print_recipes: false)
-cookbook4 = Cookbook.create(user_id: 2, print_recipes: false)
-
-
-cookbook_recipes1 = CookbookRecipe.create(cookbook_id: 1, recipe_id: 1)
-cookbook_recipes2 = CookbookRecipe.create(cookbook_id: 1, recipe_id: 2)
-cookbook_recipes3 = CookbookRecipe.create(cookbook_id: 1, recipe_id: 3)
-
 recipe1 = Recipe.create(title: 'Banana Coconut French Toast', prep_time: 10, cook_time: 20, servings: 4, meal: 'breakfast', 
 ingredients: "1 lb loaf crusty French bread, cut into ¾ slices, 1 very ripe banana, 1 (14 oz) can coconut milk, 1 teaspoon ground cinnamon, 1 teaspoon vanilla extract, 1/2 teaspoon salt, coconut oil",
 instructions: "1. In a container large enough to accommodate a slice or two of bread, mash the banana until it's smooth. Add the coconut milk, cinnamon, vanilla extract, and salt and whisk to combine. You want this batter to be as smooth as possible. 

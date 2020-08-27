@@ -18,6 +18,20 @@ class RecipesController < ApplicationController
         end
     end
 
+    def update 
+        recipe = Recipe.find_by(id: params[:id])
+        binding.pry
+        recipe.upvotes += 1;
+        render json: recipe
+    end
+
+    def destroy
+        recipes = Recipe.all
+        recipe = Recipe.find(id: params[:id])
+        recipe.upvotes -= 1;
+        render json: recipes
+    end
+
     def sort_breakfast 
         breakfast = Recipe.all.select{|recipe| recipe.meal == "breakfast"}
         render json: breakfast

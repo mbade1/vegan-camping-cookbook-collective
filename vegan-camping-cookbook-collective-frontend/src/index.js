@@ -9,7 +9,10 @@ const meal_sorter = document.querySelector(".sort-meal")
 const sort_by_container = document.querySelector(".sort-by")
 const reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
+// const votes = document.getElementsByClassName()
+const voting = document.getElementsByClassName("#fas fa-fire-alt")
 
+let loggedIn = null
 
 class Recipe {
   constructor(attributes) {
@@ -26,7 +29,7 @@ class Recipe {
   render() {
       return `<div class="recipe"> 
         <img src="${this.image}" class="recipe-avatar">
-        <span class="title">${this.title} <span class="upvotes"> <b>${this.upvotes} Upvotes <i class="fas fa-fire-alt" style="font-size:24px"></i></b></span></span>
+        <span class="title">${this.title}</span> <span class="upvotes"> <b>${this.upvotes} Upvotes <i class="fas fa-fire-alt" style="font-size:24px"></i></b></span>
         <br><br><span class="recipe-content"><b>Prep Time:</b> ${this.prep_time} minutes </span>
         <br><span class="recipe-content"><b>Cook Time:</b> ${this.cook_time} minutes</span>
         <br><span class="recipe-content"><b>Servings:</b> ${this.servings} </span>
@@ -78,41 +81,56 @@ function fetchRecipes() {
   fetch(`${RECIPES_URL}`)
   .then(response => response.json())
   .then(recipes => renderRecipes(recipes))
-  .catch(error => console.log(error.message))
+  .catch(error => console.log(error.message));
 }
-
 
 fetchRecipes()
 
+//everything above is needed!!!!!!!!
 
 
-const voting = document.getElementsByClassName("fas fa-fire-alt")
+
+
+
+
+
+
+
 function votingEvents(voting) {
-    for (let i = 0; i < voting.length; i++) {
-        voting[i].addEventListener('click', function(event){
-            if (event.target.style.color === '') {
-              fetch(RECIPES_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json"
-                },
-                body: JSON.stringify({
-                        upvotes: `${this.upvotes + 1}`,
-                })
-              })
-              .then( res => res.json())
-              .then( res => event.target.dataset.upvotes = res.upvotes)
-              .catch(error => console.log(error.message));
-                event.target.style.color = "red"
-                this.upvotes += 1
-            } else if (event.target.style.color === 'red'){
-                event.target.style.color = ''
-                this.upvotes -= 1;
-            }
+  for (let i = 0; i < voting.length; i++) {
+    voting[i].addEventListener('click', function(event){
+      if (event.target.style.color === '') {
+        debugger
+        fetch(RECIPES_URL + "/" + voting[i].id, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            id: `${event.target.dataset}`,
+            upvotes: `${+ 1}`,
+          })
         })
-    }
+        .then( res => res.json())
+        .then( res => event.target.dataset.upvotes = res.upvotes)
+        .catch(error => console.log(error.message));
+        event.target.style.color = "red"
+        this.upvotes += 1
+      } else if (event.target.style.color === 'red'){
+          debugger
+          event.target.style.color = ''
+          fetch(RECIPES_URL, {
+            method: "DELETE"
+          })
+        }
+    })
+  }
 }
+votingEvents(voting);
 document.addEventListener('DOMContentLoaded', function() {
   votingEvents(voting);
 });
+
+
+
