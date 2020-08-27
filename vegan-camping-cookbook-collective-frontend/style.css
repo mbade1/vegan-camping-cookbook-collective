@@ -118,7 +118,9 @@ p.recipe-content {
     margin-left: 10px;
 }
 
-
+.recipe .title span.voting {
+    margin-top: 5px;
+}
 div.recipe table, th, td {
     text-align: center;
     border: 2px solid black;

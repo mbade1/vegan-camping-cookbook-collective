@@ -26,7 +26,7 @@ class Recipe {
   render() {
       return `<div class="recipe"> 
         <img src="${this.image}" class="recipe-avatar">
-        <span class="title">${this.title} <span class="upvotes"> <b>${this.upvotes} Upvotes <button type="button" class="voting">+ -</button></b></span></span>
+        <span class="title">${this.title} <span class="upvotes"> <b>${this.upvotes} Upvotes <i class="fas fa-fire-alt" style="font-size:24px"></i></b></span></span>
         <br><br><span class="recipe-content"><b>Prep Time:</b> ${this.prep_time} minutes </span>
         <br><span class="recipe-content"><b>Cook Time:</b> ${this.cook_time} minutes</span>
         <br><span class="recipe-content"><b>Servings:</b> ${this.servings} </span>
@@ -44,12 +44,6 @@ function renderRecipes(recipes){
     recipe_container.innerHTML += new Recipe(recipe).render()
   })
 }
-
-
-
-
-
-
 
 
 meal_sorter.addEventListener('change', function(e){
@@ -85,16 +79,6 @@ function fetchRecipes() {
   .then(recipes => renderRecipes(recipes))
   .catch(error => console.log(error.message))
 }
-
-
-
-
-
-
-
-
-
-
 
 
 fetchRecipes()
