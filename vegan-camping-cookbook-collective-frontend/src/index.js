@@ -51,7 +51,7 @@ function renderRecipes(recipes){
 
 
 meal_sorter.addEventListener('change', function(e){
-  if (e.target.value === "index") {
+  if (e.target.value === "") {
     fetchRecipes()
   } else {
   fetch(BASE_URL + `/sort_${e.target.value}`)
