@@ -21,7 +21,7 @@ class Recipe {
       this.ingredients = attributes.ingredients;
       this.instructions = attributes.instructions;
       this.image = attributes.image;
-      this.upvotes = 0;
+      this.upvotes = attributes.upvotes;
   }
   render() {
       return `<div class="recipe"> 
@@ -35,6 +35,7 @@ class Recipe {
         <p class="recipe-content"><b>Directions:</b> ${this.instructions}</p>
         </p>
       </div>`
+      
   }
 }
 
@@ -82,3 +83,23 @@ function fetchRecipes() {
 
 
 fetchRecipes()
+
+
+
+const voting = document.getElementsByClassName("fas fa-fire-alt")
+function votingEvents(voting) {
+    for (let i = 0; i < voting.length; i++) {
+        voting[i].addEventListener('click', function(event){
+            if (event.target.style.color === '') {
+                event.target.style.color = "red"
+                this.upvotes += 1
+            } else if (event.target.style.color === 'red'){
+                event.target.style.color = ''
+                this.upvotes -= 1;
+            }
+        })
+    }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  votingEvents(voting);
+});
