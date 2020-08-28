@@ -138,41 +138,67 @@ upvotes.addEventListener('click', function(e){
 
 
 
-
-
-let addToCookbook = document.getElementsByClassName('fas fa-fire-alt')
-
-function cookbookEvents(addToCookbook) {
-  for (let i = 0; i < addToCookbook.length; i++) {
-    addToCookbook[i].addEventListener('click', function(event){
-      if (event.target.style.color === '') {
-        debugger
-        fetch(COOKBOOKS_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            user_id: `${user.id}`,
-            recipe_id: `${event.target.id}`,
-            email_recipes: false
-          })
-        })
-        .then( res => res.json())
-        .then( res => console.log(res))   //in place of console.log(res) = target.id = res.id
-        .catch(error => console.log(error.message));
-        event.target.style.color = "red"
-      } else if (event.target.style.color === 'red'){
-        event.target.style.color = ''
-        fetch(COOKBOOKS_URL + '/' + event.target.id, {
-          method: "DELETE"
-        })
-      }
+recipe_container.addEventListener('click', function(e){
+  if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
+    debugger
+    fetch(COOKBOOKS_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: `${user.id}`,
+        recipe_id: `${e.target.id}`,
+        email_recipes: false
+      })
+    })
+    .then( res => res.json())
+    .then( res => target.dataSet.cookbookId = res.id)   //in place of console.log(res) = target.id = res.id LATEST: target.dataSet.cookbookId =    
+    .catch(error => console.log(error.message));
+    e.target.style.color = "red"
+  } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
+    e.target.style.color = '';
+    debugger
+    //let cartPlant = e.target.dataset.cartPlantId
+    fetch(COOKBOOKS_URL + '/' + e.target.dataSet.cookbookId, {
+      method: "DELETE"
     })
   }
-}
-cookbookEvents(addToCookbook);
+})
+
+// let addToCookbook = document.getElementsByClassName('fas fa-fire-alt')
+
+// function cookbookEvents(addToCookbook) {
+//   for (let i = 0; i < addToCookbook.length; i++) {
+//     addToCookbook[i].addEventListener('click', function(event){
+//       if (event.target.style.color === '') {
+//         fetch(COOKBOOKS_URL, {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//           },
+//           body: JSON.stringify({
+//             user_id: `${user.id}`,
+//             recipe_id: `${event.target.id}`,
+//             email_recipes: false
+//           })
+//         })
+//         .then( res => res.json())
+//         .then( res => event.target.id = res.id)   //in place of console.log(res) = target.id = res.id    
+//         .catch(error => console.log(error.message));
+//         event.target.style.color = "red"
+//       } else if (event.target.style.color === 'red'){
+//         event.target.style.color = '';
+//         fetch(COOKBOOKS_URL + '/' + event.target.id, {
+//           method: "DELETE"
+//         })
+//       }
+//     })
+//   }
+// }
+// cookbookEvents(addToCookbook);
 
 
 
