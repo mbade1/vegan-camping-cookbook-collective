@@ -25,7 +25,6 @@ class CookbooksController < ApplicationController
     end
 
     def destroy 
-        binding.pry
         cookbook_id = params[:id]
         cookbook = Cookbook.find(cookbook_id)
         cookbook.destroy

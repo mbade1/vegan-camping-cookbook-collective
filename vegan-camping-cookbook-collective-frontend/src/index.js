@@ -13,10 +13,11 @@ const signupInputs = document.querySelectorAll(".signup-input")
 const welcomeContainer = document.querySelector('#welcome-container')
 let recipe_container = document.getElementById("recipe-container");
 const meal_sorter = document.querySelector(".sort-meal")
-const sort_by_container = document.querySelector(".sort-by")
-const reset = document.querySelector(".reset")
+let sort_by_container = document.querySelector(".sort-by")
+let reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
 let cookbookContainer = document.querySelector('.cookbook-container')
+let viewCookbook = document.querySelector('.view-cookbook')
 
 let loggedIn = null
 
@@ -60,7 +61,7 @@ function loggedInUser(object){
   heroImage.style.height = '30%';
   signupForm.style.display = 'none';
   sort_by_container.style.display = 'inline-block';
-  cookbookContainer.style.display = 'inline-block';
+  viewCookbook.style.display = 'inline-block';
   welcomeContainer.innerHTML = `Welcome, ${currentUser.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`
   recipe_container.innerHTML = "";
   fetchRecipes()
@@ -86,7 +87,6 @@ function renderRecipes(recipes){
   recipes.forEach(recipe => {
     recipe_container.innerHTML += new Recipe(recipe).render()
   })
-  
 }
 
 class Recipe {
@@ -117,14 +117,10 @@ class Recipe {
   }
 }
 
+//Event Listeners with fetch
+
 meal_sorter.addEventListener('change', function(e){
   fetch(BASE_URL + `/sort_${e.target.value}`)
-  .then(res => res.json())
-  .then(recipes => renderRecipes(recipes))
-})
-
-reset.addEventListener('click', function(e){
-  fetch(RECIPES_URL)
   .then(res => res.json())
   .then(recipes => renderRecipes(recipes))
 })
@@ -135,14 +131,32 @@ upvotes.addEventListener('click', function(e){
   .then(recipes => renderRecipes(recipes))
 })
 
+viewCookbook.addEventListener('click', function(e){
+  if (e.target.className == 'favorites') {
+    fetchCookbook();
+  }
+})
+
+//Event Listeners without Fetch
+
+sort_by_container.addEventListener('click', function(e){
+  if (e.target.className = 'all') {
+    sort_by_container.style.display = 'none';
+    loggedInUser(currentUser);
+  }
+})
+
+reset.addEventListener('click', function(e){
+  loggedInUser(currentUser)
+})
 
 
 
-//everything above is needed!!!!!!!!
+//add to cookbook
 let cookbookRecipeContainer = document.querySelector('.cookbook-recipe-container')
 
 
-
+let cookbookId;
 recipe_container.addEventListener('click', function(e){
   if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
     fetch(COOKBOOKS_URL, {
@@ -159,7 +173,7 @@ recipe_container.addEventListener('click', function(e){
       })
     })
     .then( res => res.json())
-    .then( res => target.dataset.cookbookId = res.id)   //in place of console.log(res) = target.id = res.id LATEST: target.dataSet.cookbookId =    
+    .then( res => cookbookId = res.id)   //in place of console.log(res) = target.id = res.id LATEST: target.dataSet.cookbookId =    
     .catch(error => console.log(error.message));
     e.target.style.color = "red"
     cookbookRecipeContainer.innerHTML += `<h4>${e.target.parentElement.innerText}</h4>`
@@ -167,17 +181,14 @@ recipe_container.addEventListener('click', function(e){
     e.target.style.color = '';
     debugger
     //let cartPlant = e.target.dataset.cartPlantId
-    fetch(COOKBOOKS_URL + '/' + cookbook, {
+    fetch(COOKBOOKS_URL + '/' + cookbookId, {
       method: "DELETE"
     })
     cookbookRecipeContainer.innerHTML -= `<h4>${e.target.parentElement.innerText}</h4>`
   }
 })
 
-cookbookContainer.addEventListener('click', function(e){
-  fetchCookbook()
 
-})
 
 function fetchCookbook(){
   fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
@@ -187,13 +198,12 @@ function fetchCookbook(){
 }
 
 function renderUserCookbooksOnDom(userCookbook){
-  // cookbookRecipeContainer.style.display = 'none';
-  // sort_by_container.style.display = 'none';
-  //  sort_by_container.innerHTML = '<span class="reset">All Recipes</span>';
+  sort_by_container.innerHTML = '<div class="all"><h2>Back to All Recipes</h2></div>';
+  // sort_by_container.innerHTML = '<h2 class="reset">Back to All Recipes</h2>';
   // cookbookContainer.style.display = 'block';
-  cookbookRecipeContainer.style.display = 'none';
-  cookbookContainer.style.width = '80%';
-  cookbookContainer.style.fontSize = "1.5em"
+  viewCookbook.style.display = 'none';
+  sort_by_container.style.width = '80%';
+  sort_by_container.style.fontSize = "1.5em"
   // cookbookContainer.innerHTML += `<span class="reset">All Recipes</span>`
   recipe_container.innerHTML = '';
   userCookbook.forEach(recipe => {
@@ -206,12 +216,8 @@ function renderUserCookbooksOnDom(userCookbook){
         <p class="recipe-content"><b>Ingredients:</b> ${recipe.recipe.ingredients}</p>
         <p class="recipe-content"><b>Directions:</b> ${recipe.recipe.instructions}</p>
         </p></div>`
-    
-      console.log(recipe)
-      // cookbookRecipeContainer.innerHTML += 
-  //       `${recipe.recipe.title}`
-    
     })
+    
 }
 
 
