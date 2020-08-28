@@ -4,8 +4,6 @@ const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
-let currentUser;
-let recipe;
 const heroText = document.querySelector('.hero-text')
 const heroImage = document.querySelector("#hero-image")
 const signupForm = document.querySelector('#signup-form')
@@ -18,7 +16,8 @@ let reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
 let cookbookContainer = document.querySelector('.cookbook-container')
 let viewCookbook = document.querySelector('.view-cookbook')
-
+let currentUser;
+let recipe;
 let loggedIn = null
 
 
@@ -133,7 +132,9 @@ upvotes.addEventListener('click', function(e){
 
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
+    recipe_container.style.display = 'none'
     fetchCookbook();
+    cookbookContainer.style.display = 'initial'
   }
 })
 
@@ -205,9 +206,9 @@ function renderUserCookbooksOnDom(userCookbook){
   sort_by_container.style.width = '80%';
   sort_by_container.style.fontSize = "1.5em"
   // cookbookContainer.innerHTML += `<span class="reset">All Recipes</span>`
-  recipe_container.innerHTML = '';
+  cookbookContainer.innerHTML = '';
   userCookbook.forEach(recipe => {
-    recipe_container.innerHTML += `<div class="recipe"><img src="${recipe.recipe.image}" class="recipe-avatar">
+    cookbookContainer.innerHTML += `<div class="recipe"><img src="${recipe.recipe.image}" class="recipe-avatar">
         <span class="title"><span class="upvotes">${recipe.recipe.title}</span></span>
         <br><br><span class="recipe-content"><b>Prep Time:</b> ${recipe.recipe.prep_time} minutes </span>
         <br><span class="recipe-content"><b>Cook Time:</b> ${recipe.recipe.cook_time} minutes</span>
@@ -216,8 +217,7 @@ function renderUserCookbooksOnDom(userCookbook){
         <p class="recipe-content"><b>Ingredients:</b> ${recipe.recipe.ingredients}</p>
         <p class="recipe-content"><b>Directions:</b> ${recipe.recipe.instructions}</p>
         </p></div>`
-    })
-    
+    }) 
 }
 
 
