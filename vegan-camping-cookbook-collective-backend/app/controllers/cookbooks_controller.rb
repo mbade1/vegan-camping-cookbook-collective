@@ -9,8 +9,10 @@ class CookbooksController < ApplicationController
     end
 
     def index
-        cookbooks = Cookbook.all
-        render json: cookbooks
+        user_id = params[:user_id]
+        user = User.find(user_id)
+        cookbooks = user.cookbooks
+        render json: cookbooks, include: [:recipe]
     end
 
     def create
