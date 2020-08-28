@@ -13,14 +13,19 @@ class CookbooksController < ApplicationController
         render json: cookbooks
     end
 
-    def cookbook
-        cookbook = Cookbook.find(params[:id])
-        cookbook.print_recipes = true 
-        cookbook.save
-        user = cookbook.user 
-        
-        new_cart = Cart.create(user_id: user.id)
-        
-        render json: user
+    def create
+        cookbook = Cookbook.new(cookbook_params)
+        if cookbook.save
+            render json: cookbook, except: [:created_at, :updated_at]
+        else
+            render json: {message: "Cookbook Creation Failed"}
+        end
     end
+
+    private 
+
+    def cookbook_params
+        params.require(:cookbook).permit(:user_id, :recipe_id, :email_recipes)
+    end
+
 end

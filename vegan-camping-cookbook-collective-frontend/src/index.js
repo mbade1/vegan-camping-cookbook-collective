@@ -4,7 +4,9 @@ const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`
 const USERS_URL = `${BASE_URL}/users`
 
-let user 
+let user;
+let recipe;
+const heroText = document.querySelector('.hero-text')
 const heroImage = document.querySelector("#hero-image")
 const signupForm = document.querySelector('#signup-form')
 const signupInputs = document.querySelectorAll(".signup-input")
@@ -15,15 +17,13 @@ const sort_by_container = document.querySelector(".sort-by")
 const reset = document.querySelector(".reset")
 const upvotes = document.querySelector(".upvotes")
 const cookbookContainer = document.querySelector('.cookbook-container')
-const voting = document.getElementsByClassName("#fas fa-fire-alt")
 
 let loggedIn = null
 
 
 //Signup EventListener
 signupForm.addEventListener('submit', function(e){
-
-  e.preventDefault()
+  e.preventDefault() //prevents 'home' screen from reloading itself after submit.
   fetch(USERS_URL, {
       method: "POST",
       headers: {
@@ -51,13 +51,17 @@ signupForm.addEventListener('submit', function(e){
 })
 
 function fetchRecipes(object) {
+  //logged in styling
   user = object;
+  heroText.style.top = '50%'
   heroImage.style.height = '30%';
   signupForm.style.display = 'none';
   sort_by_container.style.display = 'inline-block';
   cookbookContainer.style.display = 'inline-block';
   welcomeContainer.innerHTML = `Welcome, ${user.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`
   recipe_container.innerHTML = "";
+  
+  //fetch call to get recipes
   fetchData = {
     method: 'GET',
     headers: {
@@ -81,6 +85,7 @@ function renderRecipes(recipes){
 
 class Recipe {
   constructor(attributes) {
+      this.id = attributes.id;
       this.title = attributes.title;
       this.prep_time = attributes.prep_time;
       this.cook_time = attributes.cook_time;
@@ -94,7 +99,7 @@ class Recipe {
   render() {
       return `<div class="recipe"> 
         <img src="${this.image}" class="recipe-avatar">
-        <span class="title">${this.title}</span> <span class="upvotes"> <i class="fas fa-fire-alt" style="font-size:24px"></i></span>
+        <span class="title">${this.title}</span> <span class="upvotes"> <i class="fas fa-fire-alt" id=${this.id} style="font-size:24px"></i></span>
         <br><br><span class="recipe-content"><b>Prep Time:</b> ${this.prep_time} minutes </span>
         <br><span class="recipe-content"><b>Cook Time:</b> ${this.cook_time} minutes</span>
         <br><span class="recipe-content"><b>Servings:</b> ${this.servings} </span>
@@ -103,15 +108,9 @@ class Recipe {
         <p class="recipe-content"><b>Directions:</b> ${this.instructions}</p>
         </p>
       </div>`
+      recipe = this;
   }
 }
-
-
-
-
-
-
-
 
 meal_sorter.addEventListener('change', function(e){
   fetch(BASE_URL + `/sort_${e.target.value}`)
@@ -133,6 +132,7 @@ upvotes.addEventListener('click', function(e){
 
 
 
+
 //everything above is needed!!!!!!!!
 
 
@@ -140,44 +140,40 @@ upvotes.addEventListener('click', function(e){
 
 
 
+let addToCookbook = document.getElementsByClassName('fas fa-fire-alt')
 
-
-
-function votingEvents(voting) {
-  for (let i = 0; i < voting.length; i++) {
-    voting[i].addEventListener('click', function(event){
+function cookbookEvents(addToCookbook) {
+  for (let i = 0; i < addToCookbook.length; i++) {
+    addToCookbook[i].addEventListener('click', function(event){
       if (event.target.style.color === '') {
         debugger
-        fetch(RECIPES_URL + "/" + voting[i].id, {
+        fetch(COOKBOOKS_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
           body: JSON.stringify({
-            id: `${event.target.dataset}`,
-            upvotes: `${+ 1}`,
+            user_id: `${user.id}`,
+            recipe_id: `${event.target.id}`,
+            email_recipes: false
           })
         })
         .then( res => res.json())
-        .then( res => event.target.dataset.upvotes = res.upvotes)
+        .then( res => console.log(res))   //in place of console.log(res) = target.id = res.id
         .catch(error => console.log(error.message));
         event.target.style.color = "red"
-        this.upvotes += 1
       } else if (event.target.style.color === 'red'){
-          debugger
-          event.target.style.color = ''
-          fetch(RECIPES_URL, {
-            method: "DELETE"
-          })
-        }
+        event.target.style.color = ''
+        fetch(COOKBOOKS_URL + '/' + event.target.id, {
+          method: "DELETE"
+        })
+      }
     })
   }
 }
-votingEvents(voting);
-document.addEventListener('DOMContentLoaded', function() {
-  votingEvents(voting);
-});
+cookbookEvents(addToCookbook);
+
 
 
 

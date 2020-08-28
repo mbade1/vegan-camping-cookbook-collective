@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
     end
 
     def update 
-        recipe = Recipe.find_by(id: params[:id])
+        recipe = Recipe.find_by(:id => params[:id])
         binding.pry
         recipe.upvotes += 1;
         render json: recipe

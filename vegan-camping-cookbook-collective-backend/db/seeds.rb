@@ -5,8 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user1 = User.create(name: 'Mike', email: 'mike@gmail.com')
-user2 = User.create(name: 'Larry', email: 'larry@gmail.com')
+user1 = User.create(name: 'Mike', email: 'mike@gmail.com', password: 'password')
+user2 = User.create(name: 'Larry', email: 'larry@gmail.com', password: 'password')
 
 recipe1 = Recipe.create(title: 'Banana Coconut French Toast', prep_time: 10, cook_time: 20, servings: 4, meal: 'breakfast', 
 ingredients: "1 lb loaf crusty French bread, cut into ¾ slices, 1 very ripe banana, 1 (14 oz) can coconut milk, 1 teaspoon ground cinnamon, 1 teaspoon vanilla extract, 1/2 teaspoon salt, coconut oil",
