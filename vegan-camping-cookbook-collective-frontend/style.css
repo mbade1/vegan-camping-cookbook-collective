@@ -144,3 +144,7 @@ div.recipe table, th, td {
     margin-right: auto;
     text-align: center;
 }
+
+.fire-container h1, h3{
+    text-align: center;
+}
