@@ -1,9 +1,13 @@
-THURSDAY:
-    - sort by upvotes within each meal section????
-    - Add Recipe title to cookbook
-    - Email fetch to "email" recipes
-    - Upvote button that manipulates upvote count (like filled in icon vs unfilled icon)
-    - Figure out why, after "adding a recipe," event listeners are not working.
+SATURDAY:
+    - Figure out why fire won't stay lit for each recipe that's added. Also, rollback that db... too many test users.
+
+
+
+
+
+
+
+
 
 Layer Order: migrations, models, seed data, controller actions, data fetching, view logic, styling
 
