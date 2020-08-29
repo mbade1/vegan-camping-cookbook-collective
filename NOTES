@@ -1,5 +1,9 @@
 SATURDAY:
     - Figure out why fire won't stay lit for each recipe that's added. Also, rollback that db... too many test users.
+    - Clean Up Code (extra css, extra vars, etc.)
+    - Move JS code to multiple files?
+    - Blog
+    - Video Demo
 
 
 

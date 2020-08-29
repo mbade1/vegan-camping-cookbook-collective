@@ -10,12 +10,13 @@ DONE - Recipe class added
 - The domain model served by the Rails backend must include a resource with 
 at least one has-many relationship. For example, if you were building an Instagram clone, 
 you might display a list of photos with associated comments.
-    Cookbook:
-        has_many :cookbook_recipes
-        has_many :recipes, through: :cookbook_recipes
-    Recipe:
-        has_many :cookbook_recipes
-        has_many :cookbooks, through: :cookbook_recipes
+    User:
+        has_many :cookbooks
+        has_many :recipes, through: :cookbooks
+    Recipes:
+        has_many :recipes
+        has_many :user, through: :recipes
+        
 - The backend and frontend must collaborate to demonstrate Client-Server Communication. 
 Your application should have at least 3 AJAX calls, 
 covering at least 2 of Create, Read, Update, and Delete (CRUD). 
