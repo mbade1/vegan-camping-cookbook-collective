@@ -12,7 +12,9 @@ class CookbooksController < ApplicationController
         user_id = params[:user_id]
         user = User.find(user_id)
         cookbooks = user.cookbooks
-        render json: cookbooks, include: [:recipe]
+        #render only unique recipes - not extra ones.
+        unique = cookbooks.uniq{|r| r[:recipe_id]}
+        render json: unique, include: [:recipe]
     end
 
     def create
