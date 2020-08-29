@@ -161,7 +161,9 @@ viewCookbook.addEventListener('click', function(e){
 cookbookContainer.addEventListener('click', function(e) {
   if (event.target.className == "back") {
     cookbookContainer.style.display = 'none';
-    loggedInUser(currentUser);
+    sort_by_container.style.display = 'inline-block';
+    RecipeContainer.style.display = 'inline-block';
+    viewCookbook.style.display = 'inline-block';
   }
 })
 
@@ -173,6 +175,7 @@ reset.addEventListener('click', function(e){
 //add to cookbook
 RecipeContainer.addEventListener('click', function(e){
   if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
+    let target = event.target;
     fetch(COOKBOOKS_URL, {
       method: "POST",
       headers: {
@@ -180,6 +183,9 @@ RecipeContainer.addEventListener('click', function(e){
         Accept: "application/json"
       },
       body: JSON.stringify({
+        // user_id: `${currentUser.id}`,
+        // recipe_id: `${e.target.dataset.recipeId}`,
+        // email_recipes: false,
         user_id: `${currentUser.id}`,
         recipe_id: `${e.target.id}`,
         email_recipes: false,
@@ -187,7 +193,7 @@ RecipeContainer.addEventListener('click', function(e){
       })
     })
     .then( res => res.json())
-    .then( res => cookbookId = res.id)       
+    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id))       //target.dataset.cookbookId = res.id
     .catch(error => console.log(error.message));
     e.target.style.color = "red";
   } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
@@ -197,6 +203,38 @@ RecipeContainer.addEventListener('click', function(e){
     })
   }
 })
+
+// let target = event.target
+// debugger
+//     fetch(FAVORITES_URL, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Accept: "application/json"
+//         },
+//         body: JSON.stringify({
+//                 user_id: `${currentUser.id}`,
+//                 gift_id: `${event.target.dataset.giftId}`
+//         })
+// })
+// .then( res => res.json())
+// .then( res => target.dataset.favId = res.id);
+// debugger
+// event.target.style.color = 'red';}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function fetchCookbook(){
   fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
@@ -211,7 +249,7 @@ function renderUserCookbooksOnDom(userCookbook){
                               <h3 class="back">View All Recipes</h3>`;
   userCookbook.forEach(recipe => {
     cookbookContainer.innerHTML += `<div class="recipe"><img src="${recipe.recipe.image}" class="recipe-avatar">
-      <span class="title"><span class="upvotes">${recipe.recipe.title}</span></span>
+      <span class="title"><span class="upvotes">${recipe.recipe.title}</span><i class="fas fa-fire-alt" id=${this.id} style="font-size:24px;color:red;"></i></span>
       <br><br><span class="recipe-content"><b>Prep Time:</b> ${recipe.recipe.prep_time} minutes </span>
       <br><span class="recipe-content"><b>Cook Time:</b> ${recipe.recipe.cook_time} minutes</span>
       <br><span class="recipe-content"><b>Servings:</b> ${recipe.recipe.servings} </span>
