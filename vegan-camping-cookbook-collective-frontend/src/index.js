@@ -53,7 +53,7 @@ signupForm.addEventListener('submit', function(e){
   .then(res => res.json())
   .then(function(object){
       if (object.message) {
-          alert(object.message)
+          alert("Email must be valid.")
       }
       else {
         currentUser = object
