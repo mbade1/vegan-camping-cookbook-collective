@@ -198,7 +198,7 @@ RecipeContainer.addEventListener('click', function(e){
     e.target.style.color = "red";
   } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
     e.target.style.color = '';
-    fetch(COOKBOOKS_URL + '/' + cookbookId, {
+    fetch(COOKBOOKS_URL + '/' + event.target.dataset.cookbookId, {
       method: "DELETE"
     })
   }
