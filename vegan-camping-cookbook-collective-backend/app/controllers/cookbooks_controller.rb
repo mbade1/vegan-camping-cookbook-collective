@@ -12,7 +12,7 @@ class CookbooksController < ApplicationController
         user_id = params[:user_id]
         user = User.find(user_id)
         cookbooks = user.cookbooks
-        #render only unique recipes - not extra ones.
+        #Take out doubled recipes, in case of bug. 
         unique = cookbooks.uniq{|r| r[:recipe_id]}
         render json: unique, include: [:recipe]
     end
