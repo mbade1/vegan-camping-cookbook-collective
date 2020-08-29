@@ -54,15 +54,6 @@ textarea {
     overflow: hidden;
     margin: 10px;
 }
-/* 
-.cookbook-container .login input  {
-    color: black;
-} */
-
-
-
-
-
 
 .sort-by {
     margin-left: 10px;
@@ -73,6 +64,7 @@ textarea {
     background-color: white;
     padding: 5px;
     margin: 10px;
+    text-align: center;
 }
 
 .sort-by select {

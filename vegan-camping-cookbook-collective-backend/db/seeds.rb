@@ -142,3 +142,36 @@ instructions: "Place the marshmallows on a stick or long metal skewer and roast 
 Break a graham cracker in half. Place a square of dark chocolate on one half, and top with one of the roasted marshmallows. Place the other graham cracker half on top. Repeat for the second s'more.",
 image: "https://www.freshoffthegrid.com/wp-content/uploads/2016/07/Vegan-Smores-with-Dandies-Vegan-Marshmallows-5.jpg",
 upvotes: 300)
+
+recipe9 = Recipe.create(title: "Coconut Red Lentil Stew With Kale", prep_time: 5, cook_time: 25, servings: 2, meal: 'lunch',
+ingredients: '1 tablespoon olive oil
+1 large shallot, chopped
+3 cloves garlic, minced
+1 1/2 teaspoon coriander
+1 teaspoon cumin
+1/4 teaspoon cayenne
+14 oz can diced tomatoes, with juices
+14 oz can broth, or bouillon equivalent
+2 tablespoons coconut milk powder
+1 cup red lentils
+1 teaspoon salt
+2 cups chopped kale',
+instructions: 'Over medium heat, saute shallot in olive oil until beginning to soften, about 2 minutes. Add the minced garlic, cumin, coriander, and cayenne and saute 30 seconds, until fragrant.
+Add the tomatoes and their juices, broth, coconut milk powder, red lentils, and salt. Stir to combine. Bring to a boil and then lower to a simmer. Add the kale. Cook until the lentils begin to break apart and become creamy, about 20 minutes. Season to taste, and serve immediately. This would be great topped with some chopped cilantro or a squeeze of lime!',
+image: 'https://www.freshoffthegrid.com/wp-content/uploads/2015/08/redlentilstewH-1024x683.jpg',
+upvotes: 40)
+
+recipe10 = Recipe.create(title: 'Campfire Apple Crisp', prep_time: 5, cook_time: 15, servings: 2, meal: 'dessert',
+ingredients: '2-3 apples, sliced ¼” thin
+1 tablespoon oil or butter
+1 teaspoon ground cinnamon
+1/2 teaspoon ground nutmeg
+1/2 teaspoon ground cloves
+2 tablespoons bourbon
+1/4 cup brown sugar
+1 cup granola',
+instructions: 'In an 8" or 10” cast iron skillet, over medium heat, saute the sliced apples in a bit of oil or butter until beginning to soften, about 5 minutes.
+Add the spices, bourbon, and sugar, and stir to combine. Continue cooking until the sauce thickens and the apples are tender, 5-10 minutes.
+Remove from the heat and sprinkle the granola evenly across the top. Enjoy straight from the skillet or serve in individual bowls with a generous scoop of So Delicious coconut ice cream!',
+image: 'https://freshoffthegrid.com/wp-content/uploads/2017/09/campfire-apple-crisp-with-so-delicious-dairy-free-6.jpg',
+upvotes: 50)
