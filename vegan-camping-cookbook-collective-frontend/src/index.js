@@ -97,9 +97,10 @@ function fetchRecipes() {
 function renderRecipes(recipes){
   //render each Recipe to the RecipeContainer (start at Recipe Class for each recipe).
   RecipeContainer.innerHTML = "";
-  recipes.forEach(recipe => {
+  recipes.forEach(recipe => { //grab each recipe from the previous fetch call
     RecipeContainer.innerHTML += new Recipe(recipe).render()
   })
+  //grab any recipes the user has already placed in the cookbook (line 137)
   getRecipeTitles()
 }
 
@@ -140,123 +141,10 @@ function getRecipeTitles(){
 }
 
 function renderRecipeTitles(recipes) {
+  //empty viewCookbook container, add a header, then add individual recipes.
   viewCookbook.innerHTML = '';
   viewCookbook.innerHTML = `<h3 class="favorites">View Your Cookbook!</h3><div class="cookbook-recipe-container"></div>`
   recipes.forEach(cookbook => {
     viewCookbook.innerHTML += `<i class="fas fa-fire-alt" id=${cookbook.id} value=${cookbook.id} style="font-size:24px;color:red;"></i><span class="upvotes">${cookbook.recipe.title}</span> <br><br>`
   })
 }
-
-//Event Listeners with fetch
-meal_sorter.addEventListener('change', function(e){
-  fetch(BASE_URL + `/sort_${e.target.value}`)
-  .then(res => res.json())
-  .then(recipes => renderRecipes(recipes))
-})
-
-upvotes.addEventListener('click', function(e){
-  fetch(BASE_URL + `/sort_upvotes`)
-  .then(res => res.json())
-  .then(recipes => renderRecipes(recipes))
-})
-
-//View All Recipes
-all.addEventListener('click', function(e){
-  loggedInUser(currentUser);
-})
-
-//Event Listeners to toggle Personal Cookbook
-viewCookbook.addEventListener('click', function(e){
-  if (e.target.className == 'favorites') {
-    sort_by_container.style.display = 'none';
-    viewCookbook.style.display = 'none';
-    RecipeContainer.style.display = 'none';
-    cookbookContainer.style.display = 'inline-block';
-    fetchCookbook();
-  }
-})
-
-viewCookbook.addEventListener('click', function(e){
-  if (e.target.className === 'fas fa-fire-alt') {
-    e.target.style.color = '';
-    fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks' + '/' + e.target.id, {
-      method: "DELETE"
-    })
-    getRecipeTitles()
-  }
-})
-
-cookbookContainer.addEventListener('click', function(e) {
-  if (event.target.className === "back") {
-    cookbookContainer.style.display = 'none';
-    loggedInUser(currentUser)
-  }
-})
-
-//Event listener for deleting recipe from cookbook
-cookbookContainer.addEventListener('click', function(e){
-  if ((e.target.className === "fas fa-fire-alt") && (e.target.style.color === 'red')) {
-    fetch(COOKBOOKS_URL + '/' + event.target.id, {
-      method: "DELETE"
-    })
-    fetchCookbook()
-  }
-})
-
-
-
-//add and delete to/from cookbook
-RecipeContainer.addEventListener('click', function(e){
-  if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
-    let target = event.target;
-    fetch(COOKBOOKS_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        user_id: `${currentUser.id}`,
-        recipe_id: `${e.target.id}`,
-        email_recipes: false,
-        id: `${event.target.dataset.cookbookId}`
-      })
-    })
-    .then( res => res.json())
-    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id) && (getRecipeTitles()))       
-    .catch(error => console.log(error.message));
-  } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
-    e.target.style.color = '';
-    fetch(COOKBOOKS_URL + '/' + event.target.dataset.cookbookId, {
-      method: "DELETE"
-    })
-  }
-})
-
-
-function fetchCookbook(){
-  fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
-  .then(res => res.json())
-  .then(userCookbook => renderUserCookbooksOnDom(userCookbook))
-  .catch(error => console.log(error))
-}
-
-function renderUserCookbooksOnDom(userCookbook){
-  cookbookContainer.innerHTML = '';
-  cookbookContainer.innerHTML += `<h1 class="subheader">${currentUser.name}'s Cookbook</h1>
-                              <h3 class="back">View All Recipes</h3>`;
-  userCookbook.forEach(cookbook => {
-    cookbookContainer.innerHTML += `<div class="recipe"><img src="${cookbook.recipe.image}" class="recipe-avatar">
-      <span class="title"><span class="upvotes">${cookbook.recipe.title}</span><i class="fas fa-fire-alt" id=${cookbook.id} style="font-size:24px;color:red;"></i></span>
-      <br><br><span class="recipe-content"><b>Prep Time:</b> ${cookbook.recipe.prep_time} minutes </span>
-      <br><span class="recipe-content"><b>Cook Time:</b> ${cookbook.recipe.cook_time} minutes</span>
-      <br><span class="recipe-content"><b>Servings:</b> ${cookbook.recipe.servings} </span>
-      <br><span class="recipe-content"><b>Meal:</b> ${cookbook.recipe.meal}</span>
-      <p class="recipe-content"><b>Ingredients:</b> ${cookbook.recipe.ingredients}</p>
-      <p class="recipe-content"><b>Directions:</b> ${cookbook.recipe.instructions}</p>
-      </p></div>`;
-  })
-  sort_by_container.style.display = 'none';
-  viewCookbook.innerHTML = '';
-}
-
