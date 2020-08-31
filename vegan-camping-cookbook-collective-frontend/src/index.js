@@ -100,6 +100,7 @@ function renderRecipes(recipes){
   recipes.forEach(recipe => {
     RecipeContainer.innerHTML += new Recipe(recipe).render()
   })
+  getRecipeTitles()
 }
 
 class Recipe {
@@ -132,6 +133,21 @@ class Recipe {
   }
 }
 
+function getRecipeTitles(){
+  fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks')
+  .then(resp => resp.json()) 
+  .then(recipes => renderRecipeTitles(recipes))
+}
+
+function renderRecipeTitles(recipes) {
+  viewCookbook.innerHTML = '';
+  viewCookbook.innerHTML = `<h3 class="favorites">View Your Cookbook!</h3><div class="cookbook-recipe-container"></div>`
+  recipes.forEach(cookbook => {
+    debugger
+    viewCookbook.innerHTML += `<i class="fas fa-fire-alt" id=${cookbook.id} value=${cookbook.id} style="font-size:24px;color:red;"></i><span class="upvotes">${cookbook.recipe.title}</span> <br><br>`
+  })
+}
+
 //Event Listeners with fetch
 meal_sorter.addEventListener('change', function(e){
   fetch(BASE_URL + `/sort_${e.target.value}`)
@@ -145,6 +161,11 @@ upvotes.addEventListener('click', function(e){
   .then(recipes => renderRecipes(recipes))
 })
 
+//View All Recipes
+all.addEventListener('click', function(e){
+  loggedInUser(currentUser);
+})
+
 //Event Listeners to toggle Personal Cookbook
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
@@ -152,6 +173,17 @@ viewCookbook.addEventListener('click', function(e){
     RecipeContainer.style.display = 'none';
     cookbookContainer.style.display = 'inline-block';
     fetchCookbook();
+  }
+})
+
+viewCookbook.addEventListener('click', function(e){
+  if (e.target.className === 'fas fa-fire-alt') {
+    debugger
+    e.target.style.color = '';
+    fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks' + '/' + e.target.id, {
+      method: "DELETE"
+    })
+    getRecipeTitles()
   }
 })
 
@@ -165,7 +197,6 @@ cookbookContainer.addEventListener('click', function(e) {
 //Event listener for deleting recipe from cookbook
 cookbookContainer.addEventListener('click', function(e){
   if ((e.target.className === "fas fa-fire-alt") && (e.target.style.color === 'red')) {
-    debugger
     fetch(COOKBOOKS_URL + '/' + event.target.id, {
       method: "DELETE"
     })
@@ -173,10 +204,7 @@ cookbookContainer.addEventListener('click', function(e){
   }
 })
 
-//View All Recipes
-all.addEventListener('click', function(e){
-  loggedInUser(currentUser);
-})
+
 
 //add and delete to/from cookbook
 RecipeContainer.addEventListener('click', function(e){
@@ -196,9 +224,8 @@ RecipeContainer.addEventListener('click', function(e){
       })
     })
     .then( res => res.json())
-    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id))       
+    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id) && (getRecipeTitles()))       
     .catch(error => console.log(error.message));
-    e.target.style.color = "red";
   } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
     e.target.style.color = '';
     fetch(COOKBOOKS_URL + '/' + event.target.dataset.cookbookId, {
@@ -206,6 +233,7 @@ RecipeContainer.addEventListener('click', function(e){
     })
   }
 })
+
 
 function fetchCookbook(){
   fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
@@ -219,7 +247,6 @@ function renderUserCookbooksOnDom(userCookbook){
   cookbookContainer.innerHTML += `<h1 class="subheader">${currentUser.name}'s Cookbook</h1>
                               <h3 class="back">View All Recipes</h3>`;
   userCookbook.forEach(cookbook => {
-    debugger
     cookbookContainer.innerHTML += `<div class="recipe"><img src="${cookbook.recipe.image}" class="recipe-avatar">
       <span class="title"><span class="upvotes">${cookbook.recipe.title}</span><i class="fas fa-fire-alt" id=${cookbook.id} style="font-size:24px;color:red;"></i></span>
       <br><br><span class="recipe-content"><b>Prep Time:</b> ${cookbook.recipe.prep_time} minutes </span>
@@ -231,6 +258,6 @@ function renderUserCookbooksOnDom(userCookbook){
       </p></div>`;
   })
   sort_by_container.style.display = 'none';
-  viewCookbook.style.display = 'none';
+  viewCookbook.innerHTML = '';
 }
 
