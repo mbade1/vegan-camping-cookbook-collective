@@ -47,7 +47,7 @@ textarea {
     padding: 5px;
     width: 20%;
     height: auto;
-    background-color: white;
+    background-color: #ffffff;
     text-align: left;
     overflow: hidden;
     margin: 10px;
@@ -57,7 +57,7 @@ textarea {
     margin-left: 10px;
     float: none;
     display: none;
-    height: 120px;
+    height: 80px;
     width: 70%;
     background-color: white;
     padding: 5px;

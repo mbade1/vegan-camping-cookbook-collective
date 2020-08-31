@@ -143,7 +143,6 @@ function renderRecipeTitles(recipes) {
   viewCookbook.innerHTML = '';
   viewCookbook.innerHTML = `<h3 class="favorites">View Your Cookbook!</h3><div class="cookbook-recipe-container"></div>`
   recipes.forEach(cookbook => {
-    debugger
     viewCookbook.innerHTML += `<i class="fas fa-fire-alt" id=${cookbook.id} value=${cookbook.id} style="font-size:24px;color:red;"></i><span class="upvotes">${cookbook.recipe.title}</span> <br><br>`
   })
 }
@@ -170,6 +169,7 @@ all.addEventListener('click', function(e){
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
     sort_by_container.style.display = 'none';
+    viewCookbook.style.display = 'none';
     RecipeContainer.style.display = 'none';
     cookbookContainer.style.display = 'inline-block';
     fetchCookbook();
@@ -178,7 +178,6 @@ viewCookbook.addEventListener('click', function(e){
 
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className === 'fas fa-fire-alt') {
-    debugger
     e.target.style.color = '';
     fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks' + '/' + e.target.id, {
       method: "DELETE"
