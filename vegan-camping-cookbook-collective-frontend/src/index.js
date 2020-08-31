@@ -156,23 +156,29 @@ viewCookbook.addEventListener('click', function(e){
 })
 
 cookbookContainer.addEventListener('click', function(e) {
-  if (event.target.className == "back") {
+  if (event.target.className === "back") {
     cookbookContainer.style.display = 'none';
-    sort_by_container.style.display = 'inline-block';
-    RecipeContainer.style.display = 'inline-block';
-    viewCookbook.style.display = 'inline-block';
+    loggedInUser(currentUser)
+  }
+})
+
+//Event listener for deleting recipe from cookbook
+cookbookContainer.addEventListener('click', function(e){
+  if ((e.target.className === "fas fa-fire-alt") && (e.target.style.color === 'red')) {
+    debugger
+    fetch(COOKBOOKS_URL + '/' + event.target.id, {
+      method: "DELETE"
+    })
+    fetchCookbook()
   }
 })
 
 //View All Recipes
 all.addEventListener('click', function(e){
-  cookbookContainer.style.display = 'none';
-  sort_by_container.style.display = 'inline-block';
-  RecipeContainer.style.display = 'inline-block';
-  viewCookbook.style.display = 'inline-block';
+  loggedInUser(currentUser);
 })
 
-//add to cookbook
+//add and delete to/from cookbook
 RecipeContainer.addEventListener('click', function(e){
   if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
     let target = event.target;
@@ -212,15 +218,16 @@ function renderUserCookbooksOnDom(userCookbook){
   cookbookContainer.innerHTML = '';
   cookbookContainer.innerHTML += `<h1 class="subheader">${currentUser.name}'s Cookbook</h1>
                               <h3 class="back">View All Recipes</h3>`;
-  userCookbook.forEach(recipe => {
-    cookbookContainer.innerHTML += `<div class="recipe"><img src="${recipe.recipe.image}" class="recipe-avatar">
-      <span class="title"><span class="upvotes">${recipe.recipe.title}</span><i class="fas fa-fire-alt" id=${this.id} style="font-size:24px;color:red;"></i></span>
-      <br><br><span class="recipe-content"><b>Prep Time:</b> ${recipe.recipe.prep_time} minutes </span>
-      <br><span class="recipe-content"><b>Cook Time:</b> ${recipe.recipe.cook_time} minutes</span>
-      <br><span class="recipe-content"><b>Servings:</b> ${recipe.recipe.servings} </span>
-      <br><span class="recipe-content"><b>Meal:</b> ${recipe.recipe.meal}</span>
-      <p class="recipe-content"><b>Ingredients:</b> ${recipe.recipe.ingredients}</p>
-      <p class="recipe-content"><b>Directions:</b> ${recipe.recipe.instructions}</p>
+  userCookbook.forEach(cookbook => {
+    debugger
+    cookbookContainer.innerHTML += `<div class="recipe"><img src="${cookbook.recipe.image}" class="recipe-avatar">
+      <span class="title"><span class="upvotes">${cookbook.recipe.title}</span><i class="fas fa-fire-alt" id=${cookbook.id} style="font-size:24px;color:red;"></i></span>
+      <br><br><span class="recipe-content"><b>Prep Time:</b> ${cookbook.recipe.prep_time} minutes </span>
+      <br><span class="recipe-content"><b>Cook Time:</b> ${cookbook.recipe.cook_time} minutes</span>
+      <br><span class="recipe-content"><b>Servings:</b> ${cookbook.recipe.servings} </span>
+      <br><span class="recipe-content"><b>Meal:</b> ${cookbook.recipe.meal}</span>
+      <p class="recipe-content"><b>Ingredients:</b> ${cookbook.recipe.ingredients}</p>
+      <p class="recipe-content"><b>Directions:</b> ${cookbook.recipe.instructions}</p>
       </p></div>`;
   })
   sort_by_container.style.display = 'none';

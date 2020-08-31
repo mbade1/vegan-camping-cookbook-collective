@@ -28,8 +28,6 @@ body, html {
     color: rgb(201, 194, 194);
   }
 
-
-
 input[type=text], input[type=password] {
     color: black;
     border: 2px solid #555;
@@ -81,7 +79,6 @@ textarea {
     background-color: rgb(201, 194, 194);
     overflow: auto;
 }
-
 
 div.recipe {
     float: left;
