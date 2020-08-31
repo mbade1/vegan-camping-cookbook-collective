@@ -17,8 +17,6 @@ all.addEventListener('click', function(e){
   loggedInUser(currentUser);
 })
   
-  
-  
 //delete recipe from cookbook
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className === 'fas fa-fire-alt') {
