@@ -64,7 +64,7 @@ textarea {
     background-color: white;
     padding: 5px;
     margin: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .sort-by select {
@@ -107,7 +107,7 @@ div.recipe {
 
 span.title {
     font-size: 1.3em;
-    text-align: center;
+    text-align: left;
     margin-top: 10px;
 }
 
@@ -122,13 +122,6 @@ p.recipe-content {
 
 .recipe .title span.voting {
     margin-top: 5px;
-}
-div.recipe table, th, td {
-    text-align: center;
-    border: 2px solid black;
-    border-collapse: collapse;
-    padding: 2px;
-    margin: 0 auto;
 }
 
 .new-recipe {

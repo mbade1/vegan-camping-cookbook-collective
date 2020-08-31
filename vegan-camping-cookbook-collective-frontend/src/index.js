@@ -1,10 +1,10 @@
+//fetch URLs
 const BASE_URL = "http://localhost:3000";
 const RECIPES_URL = `${BASE_URL}/recipes`;
-const COOKBOOK_RECIPES_URL = `${BASE_URL}/cookbook_recipes`;
 const COOKBOOKS_URL = `${BASE_URL}/cookbooks`;
 const USERS_URL = `${BASE_URL}/users`;
 
-//Header query Selectors
+//Header and Sign Up Form query Selectors
 const heroText = document.querySelector('.hero-text');
 const heroImage = document.querySelector("#hero-image");
 const signupForm = document.querySelector('#signup-form');
@@ -17,7 +17,7 @@ let RecipeContainer = document.getElementById("recipe-container");
 //Sorter Query Selectors
 const meal_sorter = document.querySelector(".sort-meal");
 let sort_by_container = document.querySelector(".sort-by");
-let reset = document.querySelector(".reset");
+let all = document.querySelector(".all");
 const upvotes = document.querySelector(".upvotes");
 
 //add to Cookbook Query Selectors
@@ -30,7 +30,6 @@ let viewCookbook = document.querySelector('.view-cookbook');
 //
 let cookbookContainer = document.querySelector('.cookbook-container');
 let back = document.querySelector('.back');
-
 let currentUser;
 
 //Signup EventListener
@@ -146,8 +145,6 @@ upvotes.addEventListener('click', function(e){
   .then(recipes => renderRecipes(recipes))
 })
 
-
-
 //Event Listeners to toggle Personal Cookbook
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
@@ -168,8 +165,11 @@ cookbookContainer.addEventListener('click', function(e) {
 })
 
 //View All Recipes
-reset.addEventListener('click', function(e){
-  loggedInUser(currentUser);
+all.addEventListener('click', function(e){
+  cookbookContainer.style.display = 'none';
+  sort_by_container.style.display = 'inline-block';
+  RecipeContainer.style.display = 'inline-block';
+  viewCookbook.style.display = 'inline-block';
 })
 
 //add to cookbook
@@ -183,9 +183,6 @@ RecipeContainer.addEventListener('click', function(e){
         Accept: "application/json"
       },
       body: JSON.stringify({
-        // user_id: `${currentUser.id}`,
-        // recipe_id: `${e.target.dataset.recipeId}`,
-        // email_recipes: false,
         user_id: `${currentUser.id}`,
         recipe_id: `${e.target.id}`,
         email_recipes: false,
@@ -193,7 +190,7 @@ RecipeContainer.addEventListener('click', function(e){
       })
     })
     .then( res => res.json())
-    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id))       //target.dataset.cookbookId = res.id
+    .then( res => (target.dataset.cookbookId = res.id) && (cookbookId = res.id))       
     .catch(error => console.log(error.message));
     e.target.style.color = "red";
   } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
@@ -204,38 +201,6 @@ RecipeContainer.addEventListener('click', function(e){
   }
 })
 
-// let target = event.target
-// debugger
-//     fetch(FAVORITES_URL, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             Accept: "application/json"
-//         },
-//         body: JSON.stringify({
-//                 user_id: `${currentUser.id}`,
-//                 gift_id: `${event.target.dataset.giftId}`
-//         })
-// })
-// .then( res => res.json())
-// .then( res => target.dataset.favId = res.id);
-// debugger
-// event.target.style.color = 'red';}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function fetchCookbook(){
   fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
   .then(res => res.json())
@@ -245,7 +210,7 @@ function fetchCookbook(){
 
 function renderUserCookbooksOnDom(userCookbook){
   cookbookContainer.innerHTML = '';
-  cookbookContainer.innerHTML += `<h1 class="subheader">My Cookbook</h1>
+  cookbookContainer.innerHTML += `<h1 class="subheader">${currentUser.name}'s Cookbook</h1>
                               <h3 class="back">View All Recipes</h3>`;
   userCookbook.forEach(recipe => {
     cookbookContainer.innerHTML += `<div class="recipe"><img src="${recipe.recipe.image}" class="recipe-avatar">
