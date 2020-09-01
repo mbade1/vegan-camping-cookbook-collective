@@ -5,14 +5,14 @@ Hello and welcome to the Vegan Camping Cookbook Collective (VCCC) App! This app 
 ## Installation
 
 To use this app, just clone this [repo](https://github.com/mbade1/vegan-camping-cookbook-collective).
-Then execute:<br>
+Then execute:<br><br>
     ```$cd vegan-camping-cookbook-collective-backend```<br>
     ```$ bundle```<br>
     ```$ rake db:migrate```<br>
     ```$ rake db:seed```<br>
     ```$ rails s```
 
-In a new terminal:<br>
+In a new terminal:<br><br>
     ```$cd ..```<br>
     ```$cd vegan-camping-cookbook-collective-frontend```<br>
     ```$open index.html```
@@ -21,7 +21,7 @@ Your app should be up an running at this point. Create a User and check it out!
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/mbade1/doggo-play-date. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mbade1/vegan-camping-cookbook-collective. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
