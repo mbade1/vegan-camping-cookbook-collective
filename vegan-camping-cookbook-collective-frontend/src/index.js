@@ -15,8 +15,8 @@ const welcomeContainer = document.querySelector('#welcome-container');
 let RecipeContainer = document.getElementById("recipe-container");
 
 //Sorter Query Selectors
-const meal_sorter = document.querySelector(".sort-meal");
-let sort_by_container = document.querySelector(".sort-by");
+const mealSorter = document.querySelector(".sort-meal");
+let sortByContainer = document.querySelector(".sort-by");
 let all = document.querySelector(".all");
 const upvotes = document.querySelector(".upvotes");
 
@@ -73,7 +73,7 @@ function loggedInUser(object){
   welcomeContainer.innerHTML = `Welcome, ${currentUser.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`;
   //bring in recipe and sort containers
   RecipeContainer.style.display = 'inline-block';
-  sort_by_container.style.display = 'inline-block';
+  sortByContainer.style.display = 'inline-block';
   viewCookbook.style.display = 'inline-block';
   RecipeContainer.innerHTML = "";
   fetchRecipes()

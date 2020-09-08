@@ -21,6 +21,6 @@ function renderUserCookbooksOnDom(userCookbook){
       <p class="recipe-content"><b>Directions:</b> ${cookbook.recipe.instructions}</p>
       </p></div>`;
   })
-  sort_by_container.style.display = 'none';
+  sortByContainer.style.display = 'none';
   viewCookbook.innerHTML = '';
 }

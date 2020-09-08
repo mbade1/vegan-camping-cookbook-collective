@@ -1,5 +1,5 @@
 //Event Listeners with fetch
-meal_sorter.addEventListener('change', function(e){
+mealSorter.addEventListener('change', function(e){
   fetch(BASE_URL + `/sort_${e.target.value}`)
   .then(res => res.json())
   .then(recipes => renderRecipes(recipes))
@@ -31,7 +31,7 @@ viewCookbook.addEventListener('click', function(e){
 //Event Listeners to toggle Personal Cookbook
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
-    sort_by_container.style.display = 'none';
+    sortByContainer.style.display = 'none';
     viewCookbook.style.display = 'none';
     RecipeContainer.style.display = 'none';
     cookbookContainer.style.display = 'inline-block';
