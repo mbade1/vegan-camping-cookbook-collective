@@ -2,9 +2,9 @@ class CookbooksController < ApplicationController
   def show
     cookbook = Cookbook.find_by(id: params[:id])
     if cookbook
-      render json: cookbook
+      render json: cookbook, except: [:created_at, :updated_at]
     else 
-      render json: {message: "User not found."}
+      render json: {message: "Cookbook not found."}
     end 
   end
 
