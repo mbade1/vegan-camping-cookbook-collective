@@ -6,11 +6,12 @@ Rails.application.routes.draw do
     resources :cookbooks
   end
 
-  post '/cookbook' => 'cookbooks#cookbook'
   get '/sort_breakfast' => 'recipes#sort_breakfast'
   get '/sort_lunch' => 'recipes#sort_lunch'
   get '/sort_dinner' => 'recipes#sort_dinner'
   get '/sort_snack' => 'recipes#sort_snack'
   get '/sort_dessert' => 'recipes#sort_dessert'
   get '/sort_upvotes' => 'recipes#sort_upvotes'
+  # post '/cookbook' => 'cookbooks#cookbook'
+
 end

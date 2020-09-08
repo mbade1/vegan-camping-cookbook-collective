@@ -67,7 +67,7 @@ function loggedInUser(object){
   //logged in styling
   currentUser = object;
   signupForm.style.display = 'none'; //take away sign up form
-  //style herooText and Image
+  //style heroText and Image
   heroText.style.top = '50%';
   heroImage.style.height = '30%';
   welcomeContainer.innerHTML = `Welcome, ${currentUser.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`;
