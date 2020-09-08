@@ -36,29 +36,29 @@ let currentUser;
 signupForm.addEventListener('submit', function(e){
   e.preventDefault() //prevents 'home' screen from reloading itself after submit.
   fetch(USERS_URL, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-      },
-      body: JSON.stringify({
-          user: {
-              name: signupInputs[0].value,
-              email: signupInputs[1].value,
-              password: signupInputs[2].value
-          }
-      })
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      user: {
+        name: signupInputs[0].value,
+        email: signupInputs[1].value,
+        password: signupInputs[2].value
+      }
+    })
   })
   .then(res => res.json())
   .then(function(object){
-      if (object.message) {
-          alert("Email must be valid.")
-      }
-      else {
-        currentUser = object
-        localStorage.currentUser = object.id
-        loggedInUser(object)
-      }
+    if (object.message) {
+      alert(object.message)
+    }
+    else {
+      currentUser = object
+      localStorage.currentUser = object.id
+      loggedInUser(object)
+    }
   })
   .catch(error => console.log(error))
 })
