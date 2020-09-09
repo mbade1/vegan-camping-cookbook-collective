@@ -1,12 +1,12 @@
-// const add_recipe = document.querySelector(".add")
+// const addRecipe = document.querySelector(".add")
 
 
 
-// add_recipe.addEventListener('click', function(e){
-//     recipe_container.innerHTML = "";
-//     sort_by_container.innerHTML = "";
-//     sort_by_container.style.height = "50%";
-//     sort_by_container.innerHTML += `
+// addRecipe.addEventListener('click', function(e){
+//     recipeContainer.innerHTML = "";
+//     sortByContainer.innerHTML = "";
+//     sortByContainer.style.height = "50%";
+//     sortByContainer.innerHTML += `
 //     <div class="new-recipe">
 //       <h2>Add a New Recipe!</h2>
 //       <label for="title">Title:</label>
@@ -32,9 +32,9 @@
 //       <br><br><input type="submit" value="Add New Recipe!" id="add-new-recipe">
 //     </div>`
 
-//     const new_recipe = document.getElementById("add-new-recipe");
+//     const newRecipe = document.getElementById("add-new-recipe");
 
-//     new_recipe.addEventListener('click', function(e){
+//     newRecipe.addEventListener('click', function(e){
 //       alert('Finish creating a way to add a new recipe to the db!')
 //       debugger
 //       fetch(RECIPES_URL, {
@@ -58,8 +58,8 @@
 //       .then( res => event.target.dataset.upvotes = res.upvotes)
 //       .catch(error => console.log(error.message));
 
-//       sort_by_container.style.height = "120px";
-//       sort_by_container.innerHTML = `
+//       sortByContainer.style.height = "120px";
+//       sortByContainer.innerHTML = `
 //       <h3>
 //       Sort Recipes By:<span class="upvotes">Upvotes</span> | Meal:
 //       <span class="sort-meal"> 

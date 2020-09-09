@@ -1,4 +1,4 @@
-//Event Listeners with fetch
+//Event Listeners with fetch - use filter instead?? Many options here...
 mealSorter.addEventListener('change', function(e){
   fetch(BASE_URL + `/sort_${e.target.value}`)
   .then(res => res.json())
@@ -84,3 +84,51 @@ recipeContainer.addEventListener('click', function(e){
     })
   }
 })
+
+
+
+let alphaSort = document.querySelector('#alpha-sort');
+
+alphaSort.addEventListener('click', function(e) {
+  fetch(RECIPES_URL)
+  .then(response => response.json())
+  .then(recipes => sortedRecipes(recipes))
+})
+
+function sortedRecipes(recipes) {
+  recipes.sort(function(a, b) {
+    let nameA = a.title.toUpperCase();
+    let nameB = b.title.toUpperCase();
+    if (nameA < nameB) {
+        return -1;
+       }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  })
+  renderRecipes(recipes)
+}
+
+// function renderAlphaRecipesToDom(recipes) {
+// //make recipe container empty
+// //add recipes through Recipe class.render()
+// renderRecipes(recipes)
+// }
+
+
+
+
+// items.sort(function(a, b) {
+//   var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+//   var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+//   if (nameA < nameB) {
+//     return -1;
+//   }
+//   if (nameA > nameB) {
+//     return 1;
+//   }
+
+//   // names must be equal
+//   return 0;
+// });
