@@ -33,7 +33,7 @@ viewCookbook.addEventListener('click', function(e){
   if (e.target.className == 'favorites') {
     sortByContainer.style.display = 'none';
     viewCookbook.style.display = 'none';
-    RecipeContainer.style.display = 'none';
+    recipeContainer.style.display = 'none';
     cookbookContainer.style.display = 'inline-block';
     fetchCookbook();
   }
@@ -58,7 +58,7 @@ cookbookContainer.addEventListener('click', function(e) {
 })
 
 //add and delete to/from cookbook function
-RecipeContainer.addEventListener('click', function(e){
+recipeContainer.addEventListener('click', function(e){
   if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
     let target = event.target;
     fetch(COOKBOOKS_URL, {

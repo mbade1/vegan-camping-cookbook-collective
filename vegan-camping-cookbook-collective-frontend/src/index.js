@@ -12,7 +12,7 @@ const signupInputs = document.querySelectorAll(".signup-input");
 const welcomeContainer = document.querySelector('#welcome-container');
 
 //Recipe Container Query
-let RecipeContainer = document.getElementById("recipe-container");
+let recipeContainer = document.getElementById("recipe-container");
 
 //Sorter Query Selectors
 const mealSorter = document.querySelector(".sort-meal");
@@ -34,7 +34,7 @@ let currentUser;
 
 //Signup EventListener
 signupForm.addEventListener('submit', function(e){
-  e.preventDefault() //prevents 'home' screen from reloading itself after submit.
+  e.preventDefault() //prevents 'home' screen from reloading itself after submit... "if the event does not get explicitly handled, its default action should not be taken as it normally would be."
   fetch(USERS_URL, {
     method: "POST",
     headers: {
@@ -72,10 +72,10 @@ function loggedInUser(object){
   heroImage.style.height = '30%';
   welcomeContainer.innerHTML = `Welcome, ${currentUser.name}! Click on <i class="fas fa-fire-alt" style="font-size:24px"> to add a recipe to your cookbook!`;
   //bring in recipe and sort containers
-  RecipeContainer.style.display = 'inline-block';
+  recipeContainer.style.display = 'inline-block';
   sortByContainer.style.display = 'inline-block';
   viewCookbook.style.display = 'inline-block';
-  RecipeContainer.innerHTML = "";
+  recipeContainer.innerHTML = "";
   fetchRecipes()
 }
 
@@ -95,12 +95,13 @@ function fetchRecipes() {
 }
 
 function renderRecipes(recipes){
-  //render each Recipe to the RecipeContainer (start at Recipe Class for each recipe).
-  RecipeContainer.innerHTML = "";
-  recipes.forEach(recipe => { //grab each recipe from the previous fetch call
-    RecipeContainer.innerHTML += new Recipe(recipe).render()
+  //render each Recipe to the recipeContainer (start at Recipe Class for each recipe).
+  recipeContainer.innerHTML = "";
+  recipes.forEach(recipe => { 
+    //grab each recipe from the previous fetch call
+    recipeContainer.innerHTML += new Recipe(recipe).render()
   })
-  //grab any recipes the user has already placed in the cookbook (line 137)
+  //grab any recipes the user has already placed in the cookbook (line 138)
   getRecipeTitles()
 }
 
@@ -119,7 +120,7 @@ class Recipe {
       this.upvotes = attributes.upvotes;
   } 
   render() {
-    //render each Recipe 'card' into the RecipeContainer.
+    //render each Recipe 'card' into the recipeContainer.
       return `<div class="recipe"> 
         <img src="${this.image}" class="recipe-avatar">
         <span class="title"><span class="upvotes">${this.title}</span>  <i class="fas fa-fire-alt" id=${this.id} style="font-size:24px"></i></span>
