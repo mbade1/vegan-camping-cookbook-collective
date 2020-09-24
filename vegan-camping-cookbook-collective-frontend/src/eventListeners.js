@@ -85,7 +85,7 @@ recipeContainer.addEventListener('click', function(e){
   }
 })
 
-
+//Code challenge from technical assessment - Add an alpha sort function in frontend.
 
 let alphaSort = document.querySelector('#alpha-sort');
 
@@ -109,26 +109,3 @@ function sortedRecipes(recipes) {
   })
   renderRecipes(recipes)
 }
-
-// function renderAlphaRecipesToDom(recipes) {
-// //make recipe container empty
-// //add recipes through Recipe class.render()
-// renderRecipes(recipes)
-// }
-
-
-
-
-// items.sort(function(a, b) {
-//   var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-//   var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-//   if (nameA < nameB) {
-//     return -1;
-//   }
-//   if (nameA > nameB) {
-//     return 1;
-//   }
-
-//   // names must be equal
-//   return 0;
-// });
