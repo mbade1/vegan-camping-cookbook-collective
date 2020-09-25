@@ -1,6 +1,6 @@
 //fetching personal cookbook
 function fetchCookbook(){
-  fetch(USERS_URL + '/' + currentUser.id + '/cookbooks')
+  fetch(`${BASE_URL}/users` + '/' + currentUser.id + '/cookbooks')
   .then(res => res.json())
   .then(userCookbook => renderUserCookbooksOnDom(userCookbook))
   .catch(error => console.log(error))

@@ -1,8 +1,9 @@
 //fetch URLs
-const BASE_URL = "http://localhost:3000";
-const RECIPES_URL = `${BASE_URL}/recipes`;
-const COOKBOOKS_URL = `${BASE_URL}/cookbooks`;
-const USERS_URL = `${BASE_URL}/users`;
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = 'https://vccc.herokuapp.com/';
+// const RECIPES_URL = `${BASE_URL}/recipes`;
+// const COOKBOOKS_URL = `${BASE_URL}/cookbooks`;
+// const USERS_URL = `${BASE_URL}/users`;
 
 //Header and Sign Up Form query Selectors
 const heroText = document.querySelector('.hero-text');
@@ -35,7 +36,7 @@ let currentUser;
 //Signup EventListener
 signupForm.addEventListener('submit', function(e){
   e.preventDefault() //prevents 'home' screen from reloading itself after submit... "if the event does not get explicitly handled, its default action should not be taken as it normally would be."
-  fetch(USERS_URL, {
+  fetch(`${BASE_URL}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +89,7 @@ function fetchRecipes() {
       "Accept": "application/json"
     }
   }
-  fetch(`${RECIPES_URL}`)
+  fetch(`${BASE_URL}/recipes`)
   .then(response => response.json())
   .then(recipes => renderRecipes(recipes))
   .catch(error => console.log(error.message));
@@ -136,7 +137,7 @@ class Recipe {
 }
 
 function getRecipeTitles(){
-  fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks')
+  fetch(`${BASE_URL}/users` + '/' + currentUser.id + '/' + 'cookbooks')
   .then(resp => resp.json()) 
   .then(recipes => renderRecipeTitles(recipes))
 }

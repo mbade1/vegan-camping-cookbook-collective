@@ -21,7 +21,7 @@ all.addEventListener('click', function(e){
 viewCookbook.addEventListener('click', function(e){
   if (e.target.className === 'fas fa-fire-alt') {
     e.target.style.color = '';
-    fetch(USERS_URL + '/' + currentUser.id + '/' + 'cookbooks' + '/' + e.target.id, {
+    fetch(`${BASE_URL}/users` + '/' + currentUser.id + '/' + 'cookbooks' + '/' + e.target.id, {
       method: "DELETE"
     })
     getRecipeTitles()
@@ -42,7 +42,7 @@ viewCookbook.addEventListener('click', function(e){
 //Event listener for deleting recipe from cookbook, while viewing cookbook
 cookbookContainer.addEventListener('click', function(e){
   if ((e.target.className === "fas fa-fire-alt") && (e.target.style.color === 'red')) {
-    fetch(COOKBOOKS_URL + '/' + event.target.id, {
+    fetch(`${BASE_URL}/cookbooks` + '/' + event.target.id, {
       method: "DELETE"
     })
     fetchCookbook()
@@ -61,7 +61,7 @@ cookbookContainer.addEventListener('click', function(e) {
 recipeContainer.addEventListener('click', function(e){
   if ((e.target.style.color === '') && (e.target.className === 'fas fa-fire-alt')) {
     let target = event.target;
-    fetch(COOKBOOKS_URL, {
+    fetch(`${BASE_URL}/cookbooks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ recipeContainer.addEventListener('click', function(e){
     .catch(error => console.log(error.message));
   } else if ((e.target.className === 'fas fa-fire-alt') && (e.target.style.color === 'red')){
     e.target.style.color = '';
-    fetch(COOKBOOKS_URL + '/' + event.target.dataset.cookbookId, {
+    fetch(`${BASE_URL}/cookbooks` + '/' + event.target.dataset.cookbookId, {
       method: "DELETE"
     })
   }
@@ -90,7 +90,7 @@ recipeContainer.addEventListener('click', function(e){
 let alphaSort = document.querySelector('#alpha-sort');
 
 alphaSort.addEventListener('click', function(e) {
-  fetch(RECIPES_URL)
+  fetch(`${BASE_URL}/recipes`)
   .then(response => response.json())
   .then(recipes => sortedRecipes(recipes))
 })
