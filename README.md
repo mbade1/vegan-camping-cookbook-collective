@@ -2,6 +2,8 @@
 
 Hello and welcome to the Vegan Camping Cookbook Collective (VCCC) App! This app is designed for vegan campers, looking for recipes to use on their camping expeditions. It's hard to find good vegan camping recipes, especially when even MARSHMELLOWS are made with bone marrow! This app uses a Rails backend and vanilla JS, CSS, and HTML frontend to render recipes and users' cookbooks to the DOM. This project is used as partial fulfillment of Module 4 for the Flatiron School's Software Engineering Program. 
 
+To see the VCCC app live, [go here](https://mbade1.github.io/vegan-camping-cookbook-collective/vegan-camping-cookbook-collective-frontend/index.html).
+
 ## Installation
 
 To use this app, just clone this [repo](https://github.com/mbade1/vegan-camping-cookbook-collective).
